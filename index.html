@@ -4,10 +4,732 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khoai Chau II High School Confessions</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+    --primary-color: #ff4d6d;
+    --secondary-color: #ff758f;
+    --background-color: #fff0f3;
+    --text-color: #333333;
+    --card-color: #ffffff;
+    --accent-color: #ff8fa3;
+    --shadow: 0 4px 6px rgba(255, 77, 109, 0.1);
+    --hover-shadow: 0 8px 15px rgba(255, 77, 109, 0.15);
+    --border-color: #ddd;
+}
+
+html.dark-mode {
+    --primary-color: #ff758f;
+    --secondary-color: #ff4d6d;
+    --background-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-color: #2d2d2d;
+    --accent-color: #ff8fa3;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    --border-color: #404040;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+h1 i {
+    font-size: 2rem;
+}
+
+.subtitle {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+/* Remove .header-controls styles since we're not using it anymore */
+.header-controls {
+    display: none;
+}
+
+/* Form Styles */
+.form-section {
+    background: var(--card-color);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+    transition: transform 0.3s ease;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.form-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+label i {
+    color: var(--primary-color);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    color: var(--text-color);
+}
+
+html.dark-mode input, 
+html.dark-mode textarea {
+    background-color: #333;
+    border-color: #404040;
+    color: #fff;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: white;
+}
+
+html.dark-mode input:focus, 
+html.dark-mode textarea:focus {
+    background-color: #404040;
+    border-color: var(--primary-color);
+}
+
+.submit-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px);
+}
+
+/* Confessions Section */
+.confessions-section {
+    margin-top: 3rem;
+}
+
+.confessions-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.confession-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.confession-item {
+    background: var(--card-color);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--primary-color);
+    position: relative;
+    min-height: 150px;
+    padding-bottom: 4rem;
+}
+
+.confession-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.confession-item p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.confession-item strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.confession-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-color);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    border-radius: 0 0 20px 20px;
+}
+
+html.dark-mode .confession-footer {
+    background: rgba(45, 45, 45, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timestamp {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+html.dark-mode .timestamp {
+    color: #ddd;
+}
+
+.error-message, .no-confessions {
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-color);
+    border-radius: 10px;
+    color: var (--secondary-color);
+    grid-column: 1 / -1;
+}
+
+.error-message i, .no-confessions i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    grid-column: 1 / -1;
+}
+
+.loading i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.confession-counter {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.confession-counter i {
+    font-size: 1.2rem;
+}
+
+.confession-counter span {
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+/* Custom SweetAlert Styles */
+.swal2-popup {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    border: 1px solid rgba(108, 92, 231, 0.1) !important;
+}
+
+.swal2-title {
+    color: var(--primary-color) !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+}
+
+.swal2-html-container {
+    color: var(--text-color) !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 1.1rem !important;
+}
+
+.swal2-icon {
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.swal2-success-ring {
+    border-color: var(--primary-color) !important;
+}
+
+.swal2-success-line-tip,
+.swal2-success-line-long {
+    background-color: var(--primary-color) !important;
+}
+
+.swal2-timer-progress-bar {
+    background: var(--primary-color) !important;
+}
+
+/* Animation for form submission */
+@keyframes sendConfession {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.form-sending {
+    animation: sendConfession 1s ease infinite;
+}
+
+/* Success animation */
+@keyframes successPop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.swal2-show {
+    animation: successPop 0.5s ease !important;
+}
+
+.swal2-hide {
+    animation: successPop 0.5s ease reverse !important;
+}
+
+/* Add these styles for the toast notification */
+.animated-toast {
+    padding: 0.5rem 1rem !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-left: 4px solid var(--primary-color) !important;
+}
+
+.toast-title {
+    font-size: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.heart-icon {
+    color: #ff4d6d;
+    animation: heartBeat 1s ease infinite;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.3);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.3);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
+/* Override some SweetAlert styles for toast */
+.swal2-toast {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+}
+
+.swal2-toast .swal2-title {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.swal2-toast .swal2-icon {
+    display: none !important;
+}
+
+/* Add these styles for the share button and footer */
+.confession-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.share-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+.share-btn:hover {
+    background: rgba(255, 77, 109, 0.1);
+    transform: translateY(-2px);
+}
+
+.share-btn i {
+    font-size: 0.9rem;
+}
+
+/* Update form-header styles */
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.form-header i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+/* Styles for the confession card image */
+.confession-card-for-image {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    width: 600px;
+    padding: 20px;
+    background: #fff0f3;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+    font-family: 'Poppins', sans-serif;
+}
+
+.confession-card-for-image .card-content {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border-top: 4px solid #ff4d6d;
+}
+
+.confession-card-for-image h3 {
+    color: #ff4d6d;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.confession-card-for-image .confession-text {
+    color: #1a1a1a;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.confession-card-for-image .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.confession-card-for-image .card-link {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    color: #ff4d6d;
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button-group .share-btn {
+    padding: 0.5rem;
+}
+
+.form-section, .confession-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* Theme Toggle Switch Styles */
+.theme-toggle-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3f3f3f;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(255, 255, 255);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.slider:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f186"; /* moon icon */
+    color: #3f3f3f;
+    font-size: 12px;
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+    content: "\f185"; /* sun icon */
+    color: var(--primary-color);
+}
+
+/* Remove old theme toggle styles */
+.theme-toggle {
+    display: none;
+}
+
+/* Adjust for dark mode */
+html.dark-mode .slider {
+    background-color: var(--primary-color);
+}
+
+html.dark-mode .slider:before {
+    background-color: var(--card-color);
+}
+
+/* Like button styles */
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.like-btn i {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.like-btn:hover {
+    background: rgba(255, 77, 109, 0.1);
+}
+
+.like-btn:hover i {
+    transform: scale(1.2);
+}
+
+.like-btn.liked {
+    color: var(--primary-color);
+}
+
+.like-btn.liked i {
+    animation: likeAnimation 0.3s ease;
+}
+
+@keyframes likeAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+html.dark-mode .like-btn {
+    color: #ddd;
+}
+
+html.dark-mode .like-btn.liked {
+    color: var(--primary-color);
+}
+
+/* Confession Header Styles */
+.confession-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.confession-id {
+    font-family: monospace;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(255, 77, 109, 0.1);
+}
+
+html.dark-mode .confession-id {
+    background: rgba(255, 77, 109, 0.2);
+}
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+footer p {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.8;
+}
+
+    </style>
 </head>
 <body>
     <div id="theme-toggle-wrapper" class="theme-toggle-wrapper">
@@ -19,7 +741,7 @@
     <div class="container"> 
         <header>
             <h1><i class="fa-solid fa-graduation-cap"></i> Khoai Chau II High School Confessions</h1>
-            <p class="subtitle">Ở đâu có Nhi, ở đó có Nâm!</p>
+            <p class="subtitle">Hiện tại đang trong quá trình phát triển và ổn định cho web. Nếu có thể, hãy đăng bài nhiều hơn để chúng mình có thêm động lực duy trì và phát triển web nhé!</p>
             <div class="confession-counter">
                 <i class="fas fa-scroll"></i>
                 <span id="totalConfessions">0</span> Bài đăng
@@ -30,7 +752,7 @@
             <section class="form-section">
                 <div class="form-header">
                     <i class="fa-solid fa-pen-to-square"></i>
-                    <h2>Viết một bài đăng</h2>
+                    <h2>Tạo một bài đăng mới</h2>
                 </div>
                 <form id="confessionForm">
                     <div class="form-group">
@@ -59,12 +781,652 @@
         </main>
         
         <footer>
-            <p><i class="fas fa-lock"></i> Your secrets are safe with us</p>
+            <p><i class="fas fa-lock"></i> Bài đăng của bạn được giữ an toàn với chúng tôi</p>
         </footer>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        const form = document.getElementById('confessionForm');
+const confessionList = document.getElementById('confessionList');
+
+// Add this function at the top of your script
+function animateCounter(element, targetValue) {
+    const duration = 1000; // Animation duration in milliseconds
+    const steps = 50; // Number of steps in the animation
+    const stepDuration = duration / steps;
+    const increment = targetValue / steps;
+    let current = 0;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= targetValue) {
+            clearInterval(timer);
+            element.textContent = targetValue;
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, stepDuration);
+}
+
+// Find the form submission event listener and update it:
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const formDataObj = Object.fromEntries(formData.entries());
+    formDataObj.timestamp = new Date().toISOString();
+
+    form.reset();
+
+    fetch('https://script.google.com/macros/s/AKfycbzRmza7pyQGJvlgsLK0Np_Wc9JxIg8W-8mH6A3x4X72lYQSoUxir7Kp4H1J0AJnB9BR/exec', {
+        method: 'POST',
+        mode: 'no-cors', // Keep this
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formDataObj)
+    })
+    .then(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            width: '300px',
+            customClass: {
+                popup: 'animated-toast',
+                title: 'toast-title'
+            }
+        });
+
+        Toast.fire({
+            icon: 'success',
+            title: `<i class="fas fa-heart heart-icon"></i> Bài đăng của bạn đã được chia sẻ`
+        }).then(() => {
+            // Reload sau 1 giây để đảm bảo dữ liệu được lưu
+            setTimeout(() => window.location.reload(), 1000);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Đã xảy ra lỗi khi đăng bài',
+            confirmButtonColor: '#6c5ce7'
+        });
+    });
+});
+
+// Add this function to handle sharing
+function shareConfession(name, confession, timestamp) {
+    // Create a unique identifier for the confession using timestamp
+    const confessionId = new Date(timestamp).getTime();
+    
+    // Create the website URL with the confession ID
+    const websiteURL = `${window.location.origin}${window.location.pathname}?confession=${confessionId}`;
+    
+    // Create share text with the formatted message
+    const shareText = `Confession by ${name}:\n"${confession}"\nShared from Khoai Chau II High School Confessions\ncheck it out: ${websiteURL}`;
+    
+    // Check if Web Share API is supported
+    if (navigator.share) {
+        navigator.share({
+            title: 'Khoai Chau II High School Confessions',
+            text: shareText,
+            url: websiteURL
+        })
+        .catch((error) => console.log('Lỗi chia sẻ:', error));
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(shareText).then(() => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                width: '300px',
+                customClass: {
+                    popup: 'animated-toast',
+                    title: 'toast-title'
+                }
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: `<i class="fas fa-copy"></i> Sao chép vào clipboard`
+            });
+        });
+    }
+}
+
+function displayConfessions() {
+    confessionList.innerHTML = `
+        <div class="loading">
+            <div class="confetti-container">
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+            </div>
+            <div class="loading-content">
+                <div class="loading-icon">
+                    <i class="fas fa-heart"></i>
+                    <div class="loading-rings">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <p class="loading-text">Đang tải bài đăng<span class="dots"></span></p>
+            </div>
+        </div>
+    `;
+
+    fetch('https://script.google.com/macros/s/AKfycbzRmza7pyQGJvlgsLK0Np_Wc9JxIg8W-8mH6A3x4X72lYQSoUxir7Kp4H1J0AJnB9BR/exec')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(text => {
+        try {
+            console.log('Raw response:', text); // Debug log
+            const data = JSON.parse(text);
+            console.log('Parsed data:', data); // Debug log
+            
+            confessionList.innerHTML = '';
+            
+            if (Array.isArray(data) && data.length > 0) {
+                const totalConfessionsElement = document.getElementById('totalConfessions');
+                animateCounter(totalConfessionsElement, data.length);
+                
+                // Sort by timestamp descending
+                data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                data.forEach(confession => {
+                    const confessionItem = document.createElement('div');
+                    confessionItem.className = 'confession-item';
+                    
+                    const name = confession.name?.trim() || 'Người dùng ẩn danh';
+                    const confessionId = confession.id || '#nkccfsbeta';
+                    const confessionText = confession.confession || '';
+                    const timestamp = confession.timestamp;
+                    
+                    // Create unique IDs for buttons
+                    const shareButtonId = `share-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+                    const downloadButtonId = `download-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+                    
+                    confessionItem.innerHTML = `
+                        <div class="confession-header">
+                            <p><strong><i class="fas fa-user"></i> ${name}</strong></p>
+                            <span class="confession-id">${confessionId}</span>
+                        </div>
+                        <p>${confessionText.replace(/\n/g, '<br>')}</p>
+                        <div class="confession-footer">
+                            <small class="timestamp">
+                                <i class="fas fa-clock"></i> 
+                                ${new Date(timestamp).toLocaleString()}
+                            </small>
+                            <div class="button-group">
+                                <button id="${shareButtonId}" class="share-btn" title="Chia sẻ liên kết">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button id="${downloadButtonId}" class="share-btn" title="Tải ảnh xuống">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    confessionList.appendChild(confessionItem);
+                    
+                    document.getElementById(shareButtonId).addEventListener('click', () => 
+                        shareConfessionLink(name, confessionText, timestamp, confessionId));
+                    
+                    document.getElementById(downloadButtonId).addEventListener('click', () => 
+                        downloadConfessionImage(name, confessionText, timestamp, confessionId));
+                });
+            } else {
+                confessionList.innerHTML = `
+                    <div class="no-confessions">
+                        <p><i class="fas fa-comment-slash"></i> Chưa có bài đăng nào. Hãy trở thành người đầu tiên chia sẻ!</p>
+                    </div>
+                `;
+            }
+        } catch (e) {
+            console.error('Parsing error:', e);
+            confessionList.innerHTML = `
+                <div class="error-message">
+                    <p><i class="fas fa-exclamation-circle"></i> Không thể tải bài đăng. Hãy thử lại sau.</p>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        confessionList.innerHTML = `
+            <div class="error-message">
+                <p><i class="fas fa-exclamation-circle"></i> Tải bài đăng thất bại. Hãy thử lại sau.</p>
+            </div>
+        `;
+    });
+}
+
+// Initial load
+document.addEventListener('DOMContentLoaded', displayConfessions);
+
+// Refresh every 30 seconds
+const refreshInterval = setInterval(displayConfessions, 1800000);
+
+// Function to manually refresh confessions
+window.refreshConfessions = function() {
+    displayConfessions();
+};
+
+// Cleanup interval on page unload
+window.addEventListener('unload', () => {
+    clearInterval(refreshInterval);
+});
+
+// Add this code at the start of your script to handle confession links
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for confession ID in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const confessionId = urlParams.get('confession');
+    
+    if (confessionId) {
+        // Fetch and scroll to the specific confession
+        fetch('https://script.google.com/macros/s/AKfycbzRmza7pyQGJvlgsLK0Np_Wc9JxIg8W-8mH6A3x4X72lYQSoUxir7Kp4H1J0AJnB9BR/exec')
+        .then(response => response.text())
+        .then(text => {
+            const data = JSON.parse(text);
+            if (Array.isArray(data)) {
+                // Find the confession with matching timestamp
+                const targetConfession = data.find(c => new Date(c.timestamp).getTime() == confessionId);
+                if (targetConfession) {
+                    // Highlight the shared confession
+                    setTimeout(() => {
+                        const elements = document.querySelectorAll('.confession-item');
+                        elements.forEach(el => {
+                            const timestamp = el.querySelector('.timestamp').textContent;
+                            if (timestamp.includes(new Date(targetConfession.timestamp).toLocaleString())) {
+                                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                el.style.animation = 'highlight 2s ease';
+                            }
+                        });
+                    }, 1000);
+                }
+            }
+        });
+    }
+});
+
+// Add this CSS for highlighting shared confession
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes highlight {
+        0% { background-color: var(--primary-color); }
+        100% { background-color: var(--card-color); }
+    }
+`;
+document.head.appendChild(style);
+
+// Add these new functions for sharing and downloading
+async function shareConfessionLink(name, confession, timestamp, id) {
+    try {
+        const confessionId = timestamp ? new Date(timestamp).getTime() : Date.now();
+        const websiteURL = `${window.location.origin}${window.location.pathname}?confession=${confessionId}`;
+        const shareText = `${name}'s confession ${id}\nCheck out this confession: ${websiteURL}`;
+
+        if (navigator.share) {
+            await navigator.share({
+                text: shareText
+            });
+        } else {
+            await navigator.clipboard.writeText(shareText);
+            
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                width: '300px',
+                customClass: {
+                    popup: 'animated-toast',
+                    title: 'toast-title'
+                }
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: `<i class="fas fa-copy"></i> Đã sao chép liên kết vào clipboard`
+            });
+        }
+    } catch (error) {
+        console.error('Lỗi chia sẻ:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Âu nâu...',
+            text: 'Chia sẻ bài đăng thất bại',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    }
+}
+
+async function downloadConfessionImage(name, confession, timestamp, id) {
+    try {
+        // Create unique URL for this specific confession
+        const confessionId = timestamp ? new Date(timestamp).getTime() : Date.now();
+        const websiteURL = `${window.location.origin}${window.location.pathname}?confession=${confessionId}`;
+        
+        // Create a temporary div for the confession card
+        const card = document.createElement('div');
+        card.className = 'confession-card-for-image';
+        
+        // Format the date properly
+        const formattedDate = timestamp ? new Date(timestamp).toLocaleString() : new Date().toLocaleString();
+        
+        const formattedConfession = confession.replace(/\n/g, '<br>');
+        card.innerHTML = `
+            <div class="card-content">
+                <div class="image-header">
+                    <h3><i class="fas fa-user"></i> ${name}</h3>
+                    <span class="confession-id">${id}</span>
+                </div>
+                <p class="confession-text">"${formattedConfession}"</p>
+                <div class="card-footer">
+                    <span>Khoai Chau II High School Confessions</span>
+                    <span><i class="fas fa-clock"></i> ${formattedDate}</span>
+                </div>
+                <div class="card-link">
+                    <span>Visit: ${websiteURL}</span>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(card);
+
+        // Generate image
+        const canvas = await html2canvas(card, {
+            backgroundColor: '#fff0f3',
+            scale: 2,
+            logging: false,
+            allowTaint: true,
+            useCORS: true
+        });
+
+        document.body.removeChild(card);
+
+        // Download image
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'confession.png';
+        link.click();
+        
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            width: '300px',
+            customClass: {
+                popup: 'animated-toast',
+                title: 'toast-title'
+            }
+        });
+
+        Toast.fire({
+            icon: 'success',
+            title: `<i class="fas fa-download"></i> Đã tải ảnh xuống!`
+        }).then(() => {
+            Swal.close(); // Force close after timer completes
+        });
+
+    } catch (error) {
+        console.error('Lỗi:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Âu nâu...',
+            text: 'Tạo ảnh thất bại :(',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+
+    // Check saved theme preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Apply initial theme
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        htmlElement.classList.add('dark-mode');
+        themeToggle.checked = true;
+    }
+    
+    // Toggle theme
+    themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+            htmlElement.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            htmlElement.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+                htmlElement.classList.add('dark-mode');
+                themeToggle.checked = true;
+            } else {
+                htmlElement.classList.remove('dark-mode');
+                themeToggle.checked = false;
+            }
+        }
+    });
+});
+
+// Add this CSS for the confession ID
+const styleForId = document.createElement('style');
+styleForId.textContent = `
+    .confession-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .confession-id {
+        font-family: monospace;
+        font-weight: bold;
+        color: var(--primary-color);
+        font-size: 0.9em;
+    }
+`;
+document.head.appendChild(styleForId);
+
+// Thêm CSS cho loading animation mới
+const loadingStyle = document.createElement('style');
+loadingStyle.textContent = `
+    .loading {
+        text-align: center;
+        padding: 3rem;
+        grid-column: 1 / -1;
+        background: var(--card-color);
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .confetti-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: var(--primary-color);
+        opacity: 0.6;
+        border-radius: 50%;
+        animation: confetti 3s ease-in-out infinite;
+    }
+
+    .confetti:nth-child(1) {
+        left: 25%;
+        animation-delay: 0s;
+    }
+
+    .confetti:nth-child(2) {
+        left: 50%;
+        animation-delay: 1s;
+    }
+
+    .confetti:nth-child(3) {
+        left: 75%;
+        animation-delay: 2s;
+    }
+
+    .loading-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .loading-icon {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .loading-icon i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .loading-rings div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    .loading-rings div:nth-child(1) {
+        width: 40px;
+        height: 40px;
+        animation: ring 2s ease-in-out infinite;
+    }
+
+    .loading-rings div:nth-child(2) {
+        width: 60px;
+        height: 60px;
+        animation: ring 2s ease-in-out infinite;
+        animation-delay: 0.4s;
+    }
+
+    .loading-rings div:nth-child(3) {
+        width: 80px;
+        height: 80px;
+        animation: ring 2s ease-in-out infinite;
+        animation-delay: 0.8s;
+    }
+
+    .loading-text {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        font-weight: 500;
+        margin-top: 1rem;
+        opacity: 0.9;
+    }
+
+    .dots::after {
+        content: '';
+        animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes confetti {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
+            opacity: 0.6;
+        }
+        50% {
+            transform: translate(0, 100px) rotate(180deg);
+            opacity: 0.8;
+        }
+        100% {
+            transform: translate(0, 0) rotate(360deg);
+            opacity: 0.6;
+        }
+    }
+
+    @keyframes ring {
+        0% {
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.5;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.2);
+            opacity: 0;
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+
+    @keyframes dots {
+        0%, 20% { content: ''; }
+        40% { content: '.'; }
+        60% { content: '..'; }
+        80% { content: '...'; }
+    }
+
+    /* Dark mode adjustments */
+    html.dark-mode .loading {
+        background: var(--card-color);
+    }
+
+    html.dark-mode .confetti {
+        background: var(--primary-color);
+    }
+`;
+document.head.appendChild(loadingStyle);
+
+    </script>>
 </body>
 </html>
