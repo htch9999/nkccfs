@@ -10,24 +10,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #ff4d6d;
-            --secondary-color: #ff758f;
-            --background-color: #fff0f3;
+            --primary-color: #6c5ce7;
+            --secondary-color: #8c7ae6;
+            --background-color: #e6e4f9;
             --text-color: #333333;
             --card-color: #ffffff;
-            --accent-color: #ff8fa3;
-            --shadow: 0 4px 6px rgba(255, 77, 109, 0.1);
-            --hover-shadow: 0 8px 15px rgba(255, 77, 109, 0.15);
+            --accent-color: #a29bfe;
+            --shadow: 0 4px 6px rgba(108, 92, 231, 0.1);
+            --hover-shadow: 0 8px 15px rgba(108, 92, 231, 0.15);
             --border-color: #ddd;
         }
 
         html.dark-mode {
-            --primary-color: #ff758f;
-            --secondary-color: #ff4d6d;
+            --primary-color: #a29bfe;
+            --secondary-color: #6c5ce7;
             --background-color: #1a1a1a;
             --text-color: #ffffff;
             --card-color: #2d2d2d;
-            --accent-color: #ff8fa3;
+            --accent-color: #8c7ae6;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
             --border-color: #404040;
@@ -78,7 +78,7 @@
         }
 
         .subtitle {
-            color: var(--secondary-color);
+            color: var (--secondary-color);
             font-size: 1.1rem;
         }
 
@@ -105,7 +105,47 @@
         }
 
         .form-group {
+            position: relative;
             margin-bottom: 1.5rem;
+        }
+
+        .reply-tag-overlay {
+            position: absolute;
+            pointer-events: none;
+            font-family: monospace;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.2rem 0.5rem;
+            margin: 1rem;
+            background: rgb(248, 249, 250);
+            border-radius: 4px;
+            display: none;
+            z-index: 2;
+        }
+
+        /* Thêm style cho container của textarea */
+        .form-group {
+            position: relative;
+        }
+
+        /* Thêm style cho vùng che phủ text */
+        .reply-text-mask {
+            position: absolute;
+            background: rgb(248, 249, 250);
+            height: calc(1.8rem + 4px); /* Chính xác chiều cao của overlay */
+            display: none;
+            margin: 1rem;
+            z-index: 1;
+            border-radius: 4px; /* Đồng bộ với overlay */
+        }
+
+        html.dark-mode .reply-tag-overlay {
+            background: #333;
+        }
+
+        html.dark-mode .reply-text-mask {
+            background: #333;
         }
 
         label {
@@ -468,7 +508,7 @@
         }
 
         .share-btn:hover {
-            background: rgba(255, 77, 109, 0.1);
+            background: rgba(108, 92, 231, 0.15);
             transform: translateY(-2px);
         }
 
@@ -564,7 +604,7 @@
 
         /* Theme Toggle Switch Styles */
         .theme-toggle-wrapper {
-            position: fixed;
+            position: absolute;
             top: 20px;
             right: 20px;
             z-index: 1000;
@@ -613,14 +653,14 @@
         .slider:before {
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
-            content: "\f186"; /* moon icon */
+            content: "\f185"; /* moon icon */
             color: #3f3f3f;
             font-size: 12px;
         }
 
         input:checked + .slider:before {
             transform: translateX(30px);
-            content: "\f185"; /* sun icon */
+            content: "\f186"; /* sun icon */
             color: var(--primary-color);
         }
 
@@ -664,7 +704,7 @@
         }
 
         .like-btn:hover {
-            background: rgba(255, 77, 109, 0.1);
+            background: rgba(108, 92, 231, 0.15);
         }
 
         .like-btn:hover i {
@@ -703,16 +743,16 @@
 
         .confession-id {
             font-family: monospace;
-            color: var(--secondary-color);
+            color: var(--text-color);
             font-size: 0.9rem;
             font-weight: 500;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
-            background: rgba(255, 77, 109, 0.1);
+            background: rgba(108, 92, 231, 0.1);
         }
 
         html.dark-mode .confession-id {
-            background: rgba(255, 77, 109, 0.2);
+            background: rgba(108, 92, 231, 0.2);
         }
 
         footer {
@@ -729,19 +769,355 @@
             opacity: 0.8;
         }
 
+        .reply-tag {
+            font-family: monospace;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(108, 92, 231, 0.1);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        html.dark-mode .reply-tag {
+            background: rgba(108, 92, 231, 0.2);
+        }
+
+        .reply-preview {
+            display: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .reply-preview.active {
+            display: block;
+        }
+
+        .reply-btn:hover {
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .reply-btn.active {
+            color: var(--secondary-color);
+        }
+
+        .reply-preview-box {
+            font-family: monospace;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.2rem 0.5rem;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 4px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+
+        html.dark-mode .reply-preview-box {
+            background: rgba(108, 92, 231, 0.2);
+        }
+        
+        .submission-notice {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            background: rgba(255, 65, 65, 0.312);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        html.dark-mode .submission-notice {
+            background: rgba(255, 65, 65, 0.312);
+        }
+
+        /* Header Button Styles */
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .header-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            background: var(--card-color);
+            color: var(--primary-color);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .header-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        html.dark-mode .header-btn {
+            background: var(--card-color);
+            color: var(--primary-color);
+        }
+
+        html.dark-mode .header-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Update SweetAlert Styles */
+        .swal2-popup {
+            background: rgba(248, 249, 250, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            border-radius: 20px !important;
+            padding: 2rem !important;
+            border: 1px solid var(--border-color) !important;
+        }
+
+        html.dark-mode .swal2-popup {
+            background: rgba(45, 45, 45, 0.95) !important;
+        }
+
+        .swal2-actions button {
+            box-shadow: var(--shadow) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .swal2-actions button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: var(--hover-shadow) !important;
+        }
+
+        .swal2-close:focus {
+            box-shadow: none !important;
+        }
+
+        /* Modal Styles */
+        .custom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-modal.active {
+            display: flex;
+        }
+
+        .custom-modal-content {
+            background: var(--card-color);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .custom-modal-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .custom-modal-content p {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .custom-modal-content ul {
+            text-align: left;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .custom-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .custom-modal-close:hover {
+            color: var(--secondary-color);
+        }
+
+        /* New Modal Styles */
+        .info-modal {
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .info-modal.show {
+            opacity: 1;
+            visibility: visible;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-modal-content {
+            background: var(--card-color);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.95) translateY(-30px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .info-modal.show .info-modal-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .info-modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .info-modal-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            text-align: center;
+        }
+
+        .info-modal-body {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-modal-body p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .info-modal-body strong {
+            display: block;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .info-modal-body i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-modal-button {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 25px;
+            background: #6c5ce7;
+            color: rgb(255, 255, 255);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .info-modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        html.dark-mode .info-modal {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes modalClose {
+            from {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.95) translateY(30px);
+            }
+        }
+        .changelog-version {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .changelog-version strong {
+            color: var(--primary-color);
+        }
     </style>
 </head>
 <body>
-    <div id="theme-toggle-wrapper" class="theme-toggle-wrapper">
-        <label class="switch">
-            <input type="checkbox" id="themeToggle">
-            <span class="slider"></span>
-        </label>
-    </div>
     <div class="container"> 
         <header>
+            <div id="theme-toggle-wrapper" class="theme-toggle-wrapper">
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
             <h1><i class="fa-solid fa-graduation-cap"></i> Khoai Chau II High School Confessions</h1>
             <p class="subtitle">Website này không phải là một website chính thức của trường, chỉ được thành lập bởi một thằng ất ơ nào đấy. Hiện tại đang trong quá trình phát triển và ổn định cho web. Nếu có thể, hãy đăng bài nhiều hơn để chúng mình có thêm động lực duy trì và phát triển web nhé!</p>
+            <div class="header-buttons">
+                <button class="header-btn" id="featuresBtn">
+                    <i class="fas fa-book-open"></i>
+                    Hướng dẫn tính năng
+                </button>
+                <button class="header-btn" id="changelogBtn">
+                    <i class="fas fa-history"></i>
+                    Nhật ký sửa đổi
+                </button>
+            </div>
             <div class="confession-counter">
                 <i class="fas fa-scroll"></i>
                 <span id="totalConfessions">0</span> Bài đăng
@@ -762,6 +1138,8 @@
                     
                     <div class="form-group">
                         <label for="confession"><i class="fas fa-heart"></i> Nội dung</label>
+                        <div class="reply-text-mask"></div>
+                        <div class="reply-tag-overlay"></div>
                         <textarea id="confession" name="confession" rows="4" 
                             placeholder="Nội dung bài đăng của bạn..." required></textarea>
                     </div>
@@ -769,6 +1147,9 @@
                     <button type="submit" class="submit-btn">
                         <i class="fas fa-paper-plane"></i> Đăng!
                     </button>
+                    <p class="submission-notice">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Vui lòng đăng bài với thái độ tôn trọng. Không sử dụng từ ngữ phân biệt, miệt thị hoặc thô tục. Nếu vi phạm, bài đăng sẽ được kiểm duyệt và xoá bỏ.</ap>
                 </form>
             </section>
 
@@ -785,6 +1166,16 @@
         </footer>
     </div>
     
+    <div id="infoModal" class="info-modal">
+        <div class="info-modal-content">
+            <div class="info-modal-header">
+                <h3 class="info-modal-title"></h3>
+            </div>
+            <div class="info-modal-body"></div>
+            <button class="info-modal-button"></button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
@@ -815,11 +1206,22 @@ form.addEventListener('submit', e => {
     e.preventDefault();
     const formData = new FormData(form);
     const formDataObj = Object.fromEntries(formData.entries());
+    const confessionTextarea = document.getElementById('confession');
+    const replyId = confessionTextarea.dataset.replyId;
+    
+    // Check if this is a reply and restore the original tag format
+    const confessionText = formDataObj.confession;
+    
+    if (replyId && confessionText.startsWith(`Trả lời ${replyId}:`)) {
+        formDataObj.confession = `<reply_${replyId}>` + confessionText.substring(`Trả lời ${replyId}:`.length);
+    }
+    
     formDataObj.timestamp = new Date().toISOString();
 
     form.reset();
+    delete confessionTextarea.dataset.replyId; // Clear stored reply ID
 
-    fetch('https://script.google.com/macros/s/AKfycbzRmza7pyQGJvlgsLK0Np_Wc9JxIg8W-8mH6A3x4X72lYQSoUxir7Kp4H1J0AJnB9BR/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbzHl9W5inqsxuwtNs2W27W6qsFioRH9rlPnpuJtLtR1Tfm9EkWg1wvHIAbkynXNY3TVkw/exec', {
         method: 'POST',
         mode: 'no-cors', // Keep this
         headers: {
@@ -925,7 +1327,7 @@ function displayConfessions() {
         </div>
     `;
 
-    fetch('https://script.google.com/macros/s/AKfycbzRmza7pyQGJvlgsLK0Np_Wc9JxIg8W-8mH6A3x4X72lYQSoUxir7Kp4H1J0AJnB9BR/exec')
+    fetch('https://script.google.com/macros/s/AKfycbzHl9W5inqsxuwtNs2W27W6qsFioRH9rlPnpuJtLtR1Tfm9EkWg1wvHIAbkynXNY3TVkw/exec')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -960,12 +1362,23 @@ function displayConfessions() {
                     const shareButtonId = `share-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
                     const downloadButtonId = `download-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
                     
-                    confessionItem.innerHTML = `
+                    const replyMatch = confessionText.match(/<reply_(#nkccfs\d{3})>(.*)/);
+                    let displayText = confessionText;
+                    let replyTag = '';
+                    
+                    if (replyMatch) {
+                        const [fullMatch, replyId, content] = replyMatch;
+                        replyTag = `<div class="reply-tag">Trả lời ${replyId}</div>`;
+                        displayText = content.trim();
+                    }
+                    
+                    confessionItem.innerHTML = `    
                         <div class="confession-header">
                             <p><strong><i class="fas fa-user"></i> ${name}</strong></p>
                             <span class="confession-id">${confessionId}</span>
                         </div>
-                        <p>${confessionText.replace(/\n/g, '<br>')}</p>
+                        ${replyTag}
+                        <p>${displayText.replace(/\n/g, '<br>')}</p>
                         <div class="confession-footer">
                             <small class="timestamp">
                                 <i class="fas fa-clock"></i> 
@@ -978,6 +1391,9 @@ function displayConfessions() {
                                 <button id="${downloadButtonId}" class="share-btn" title="Tải ảnh xuống">
                                     <i class="fas fa-download"></i>
                                 </button>
+                                <button id="reply-${confessionId}" class="share-btn reply-btn" title="Trả lời bài đăng">
+                                    <i class="fas fa-reply"></i>
+                                </button>
                             </div>
                         </div>
                     `;
@@ -989,6 +1405,26 @@ function displayConfessions() {
                     
                     document.getElementById(downloadButtonId).addEventListener('click', () => 
                         downloadConfessionImage(name, confessionText, timestamp, confessionId));
+                    
+                    // Add event listener for reply button
+                    document.getElementById(`reply-${confessionId}`).addEventListener('click', () => {
+                        const textarea = document.getElementById('confession');
+                        const replyTag = `<reply_${confessionId}>`;
+                        textarea.value = replyTag; // This will trigger the input event and create preview
+                        textarea.focus();
+                        
+                        // Manually trigger input event to show preview immediately
+                        const inputEvent = new Event('input', {
+                            bubbles: true,
+                            cancelable: true,
+                        });
+                        textarea.dispatchEvent(inputEvent);
+                        
+                        document.querySelector('.form-section').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    });
                 });
             } else {
                 confessionList.innerHTML = `
@@ -1040,7 +1476,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (confessionId) {
         // Fetch and scroll to the specific confession
-        fetch('https://script.google.com/macros/s/AKfycbzRmza7pyQGJvlgsLK0Np_Wc9JxIg8W-8mH6A3x4X72lYQSoUxir7Kp4H1J0AJnB9BR/exec')
+        fetch('https://script.google.com/macros/s/AKfycbzHl9W5inqsxuwtNs2W27W6qsFioRH9rlPnpuJtLtR1Tfm9EkWg1wvHIAbkynXNY3TVkw/exec')
         .then(response => response.text())
         .then(text => {
             const data = JSON.parse(text);
@@ -1460,6 +1896,184 @@ loadingStyle.textContent = `
 `;
 document.head.appendChild(loadingStyle);
 
-    </script>>
+    // Add this after form const declaration
+    const confessionTextarea = document.getElementById('confession');
+    const replyOverlay = document.querySelector('.reply-tag-overlay');
+    const replyTextMask = document.querySelector('.reply-text-mask');
+
+    confessionTextarea.addEventListener('input', () => {
+        const text = confessionTextarea.value;
+        const replyMatch = text.match(/^<reply_(#nkccfs\d{3})>/);
+        
+        if (replyMatch) {
+            const [fullMatch, replyId] = replyMatch;
+            // Replace the tag with visual preview in a box
+            const previewText = `<span class="reply-preview-box">Trả lời ${replyId}:</span> `;
+            const restOfText = text.substring(fullMatch.length);
+            
+            // Create a temporary element to handle HTML content
+            const temp = document.createElement('div');
+            temp.innerHTML = previewText;
+            const plainPreviewText = temp.textContent;
+            
+            confessionTextarea.value = plainPreviewText + restOfText;
+            confessionTextarea.dataset.replyId = replyId;
+            
+            // Position cursor after preview
+            const cursorPos = plainPreviewText.length;
+            confessionTextarea.setSelectionRange(cursorPos, cursorPos);
+        } else if (!text.includes('Trả lời #nkccfs')) {
+            delete confessionTextarea.dataset.replyId;
+        }
+    });
+
+    // Thêm vào phần xử lý hiển thị confession để giữ nguyên format reply
+    function processConfessionText(confessionText) {
+        const replyMatch = confessionText.match(/^<reply_(#nkccfs\d{3})>(.*)/);
+        if (replyMatch) {
+            const [fullMatch, replyId, content] = replyMatch;
+            return {
+                replyTag: `<div class="reply-tag">Trả lời ${replyId}:</div>`,
+                displayText: content.trim()
+            };
+        }
+        return {
+            replyTag: '',
+            displayText: confessionText
+        };
+    }
+
+    // Cập nhật trong hàm displayConfessions khi tạo confession item
+    // Thay thế đoạn xử lý replyMatch cũ bằng:
+    // ...existing code...
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const featuresBtn = document.getElementById('featuresBtn');
+        const changelogBtn = document.getElementById('changelogBtn');
+
+        // Move the processConfessionText function before we use it
+        function processConfessionText(confessionText) {
+            const replyMatch = confessionText.match(/^<reply_(#nkccfs\d{3})>(.*)/);
+            if (replyMatch) {
+                const [fullMatch, replyId, content] = replyMatch;
+                return {
+                    replyTag: `<div class="reply-tag">Trả lời ${replyId}:</div>`,
+                    displayText: content.trim()
+                };
+            }
+            return {
+                replyTag: '',
+                displayText: confessionText
+            };
+        }
+
+        // Close modal on close button click
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    });
+
+    // Function to open the modal
+    function openModal(title, content) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = content;
+        modal.classList.add('active');
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        modal.classList.remove('active');
+    }
+
+// Replace the existing modal JavaScript code with this
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('infoModal');
+    const modalTitle = modal.querySelector('.info-modal-title');
+    const modalBody = modal.querySelector('.info-modal-body');
+    const modalButton = modal.querySelector('.info-modal-button');
+    const featuresBtn = document.getElementById('featuresBtn');
+    const changelogBtn = document.getElementById('changelogBtn');
+
+    function showModal(title, content, buttonText) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = content;
+        modalButton.textContent = buttonText;
+        
+        // Add animation classes
+        modal.classList.add('show');
+        modal.querySelector('.info-modal-content').style.animation = 'modalOpen 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+        
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+        const content = modal.querySelector('.info-modal-content');
+        content.style.animation = 'modalClose 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+        
+        setTimeout(() => {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            content.style.animation = '';
+        }, 300);
+    }
+
+    // Event Listeners
+    featuresBtn.addEventListener('click', () => {
+        showModal('Hướng dẫn tính năng', `
+            <p><i class="fas fa-reply"></i> <strong>Trả lời bài đăng:</strong> Nhấn nút reply để trả lời một bài đăng cụ thể</p>
+            <p><i class="fas fa-share-alt"></i> <strong>Chia sẻ:</strong> Chia sẻ bài đăng qua đường link</p>
+            <p><i class="fas fa-download"></i> <strong>Tải xuống:</strong> Tải bài đăng dưới dạng hình ảnh</p>
+            <p><i class="fas fa-moon"></i> <strong>Chế độ tối:</strong> Chuyển đổi giao diện sáng/tối</p>
+        `, 'Đã hiểu');
+    });
+
+    changelogBtn.addEventListener('click', () => {
+        showModal('Nhật ký sửa đổi', `
+            <p class="changelog-version"><strong>Phiên bản 1.0.2 (29/03/2025)</strong></p>
+            <ul>
+                <li><i class="fas fa-plus"></i> Thay đổi màu nền chủ đạo thành màu tím (vì t thích🙃)</li>
+                <li><i class="fas fa-plus"></i> Thêm tính năng trả lời bài đăng</li>
+                <li><i class="fas fa-plus"></i> Thêm các nút Hướng dẫn chức năng, Nhật kí sửa đổi</li>
+                <li><i class="fas fa-plus"></i> Cải thiện một số tính năng, vấn đề bảo mật và hiệu suất</li>
+                <p></p>
+            </ul>
+             <p class="changelog-version"><strong>Phiên bản 1.0 (25/03/2025)</strong></p>
+            <ul>
+                <li><i class="fas fa-star"></i> Ra mắt website</li>
+                <li><i class="fas fa-plus"></i> Thêm tính năng đăng bài</li>
+                <li><i class="fas fa-plus"></i> Thêm tính năng chia sẻ</li>
+                <li><i class="fas fa-plus"></i> Thêm tính năng lưu bài đăng dưới dạng hình ảnh</li>
+                <li><i class="fas fa-plus"></i> Thêm chế độ tối</li>
+            </ul>
+        `, 'Đóng');
+    });
+
+
+    
+    // Close button click
+    modalButton.addEventListener('click', hideModal);
+
+    // Click outside modal
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            hideModal();
+        }
+    });
+
+    // Press Escape to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            hideModal();
+        }
+    });
+});
+
+// ...existing code...
+</script>
 </body>
 </html>
