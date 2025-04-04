@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Tháng 4 - Ngày Thống Nhất</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e74c3c;       /* Red */
+            --secondary-color: #f1c40f;     /* Yellow */
+            --background-color: #fff5f5;    /* Light red tint */
+            --text-color: #333333;
+            --card-color: #ffffff;
+            --accent-color: #f39c12;        /* Orange-yellow */
+            --shadow: 0 4px 6px rgba(231, 76, 60, 0.1);
+            --hover-shadow: 0 8px 15px rgba(231, 76, 60, 0.15);
+            --border-color: #ddd;
+            --background-rgb: 255, 245, 245;
+        }
+
+        html.dark-mode {
+            --primary-color: #ff6b6b;       /* Lighter red */
+            --secondary-color: #ffd93d;     /* Brighter yellow */
+            --background-color: #1a1a1a;
+            --text-color: #ffffff;
+            --card-color: #2d2d2d;
+            --accent-color: #ffa502;        /* Orange */
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            --border-color: #404040;
+            --background-rgb: 26, 26, 26;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1 0 auto;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .header-image {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+            margin-top: 0;
+            top: -100px;
+            mask-image: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.2) 5%,
+                rgba(0, 0, 0, 0.6) 25%,
+                rgba(0, 0, 0, 0.9) 45%,
+                black 65%
+            );
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.2) 5%,
+                rgba(0, 0, 0, 0.6) 25%,
+                rgba(0, 0, 0, 0.9) 45%,
+                black 65%
+            );
+        }
+
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            transform: scale(1.15);
+            filter: brightness(0.85);
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 10%,
+                rgba(var(--background-rgb), 0.2) 30%,
+                rgba(var(--background-rgb), 0.7) 60%,
+                var(--background-color) 90%
+            );
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        .content-section {
+            margin-top: 20px;
+            position: relative;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .content-image {
+            flex: 0 0 30%;
+            border-radius: 10px;
+            overflow: hidden;
+            transform: rotate(-8deg);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: rotate(0deg);
+            box-shadow: var(--hover-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: 100%;
+            /* max-height: 300px; */
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .content-text {
+            flex: 1;
+        }
+
+        .content-text h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Add text shadow for better visibility */
+        }
+
+        .content-text h1.anniversary {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-text p {
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);  /* Add text shadow for better visibility */
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: var(--card-color);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: var(--hover-shadow);
+        }
+
+        .back-button:active {
+            transform: translateX(-2px);
+        }
+
+        .back-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover i {
+            transform: translateX(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .header-image {
+                height: 60vh;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .content-section {
+                margin-top: 60px;
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+
+            .content-image {
+                flex: 0 0 80%;
+                margin: 0 auto;
+            }
+
+            .content-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .content-text h1.anniversary {
+                font-size: 1.3rem;
+            }
+
+            .content-text p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='./'">
+        <i class="fa-solid fa-arrow-left"></i> Quay lại
+    </button>
+    
+    <div class="main-content">
+        <div class="container">
+            <div class="content-section">
+                <div class="content-image">
+                    <img src="https://www.rophim.me/images/event_304/page-vn-flag.jpg" alt="30 Thang 4">
+                </div>
+                <div class="content-text">
+                    <h1>Kỷ niệm 50 Năm Ngày Giải Phóng Miền Nam - Thống Nhất Đất Nước</h1>
+                    <h1 class="anniversary">30/04/1975 - 30/04/2025</h1>
+                    <p>11 giờ 30 phút trưa 30/4/1975, cổng Dinh Độc Lập đã bị húc đổ, lá cờ của Quân Giải phóng tung bay ngay tại tổng hành dinh của chính quyền Sài Gòn trong niềm hân hoan, chờ đón của cả dân tộc. Từ đây, miền Nam đã hoàn toàn giải phóng, non sông Việt Nam thống nhất một dải. Đây là thắng lợi vĩ đại nhất, kết thúc 30 năm chiến tranh lâu dài, gian khổ chống ngoại xâm của dân tộc Việt Nam, mở ra một kỷ nguyên mới - kỷ nguyên độc lập dân tộc và chủ nghĩa xã hội trên toàn bộ Tổ quốc Việt Nam.</p>
+                    <p>Chiến dịch Hồ Chí Minh đánh dấu bước ngoặt lớn trong lịch sử dân tộc, đã hoàn thành trọn vẹn mục tiêu “Đánh cho Mỹ cút, đánh cho ngụy nhào” như Chủ tịch Hồ Chí Minh đề ra; giải phóng toàn bộ miền Nam, chấm dứt 21 năm chia cắt đất nước, đưa đến sự thống nhất, độc lập, chủ quyền toàn vẹn lãnh thổ của Việt Nam trên đất liền, vùng trời, vùng biển; đưa dân tộc ta bước vào kỷ nguyên mới.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-image">
+            <img src="https://www.rophim.me/images/event_304/gpmn-bg.webp" alt="30 Tháng 4">
+            <div class="gradient-overlay"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sync theme with index.html
+        document.addEventListener('DOMContentLoaded', () => {
+            const htmlElement = document.documentElement;
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                htmlElement.classList.add('dark-mode');
+            }
+        });
+
+        // Listen for theme changes
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'theme') {
+                const htmlElement = document.documentElement;
+                if (e.newValue === 'dark') {
+                    htmlElement.classList.add('dark-mode');
+                } else {
+                    htmlElement.classList.remove('dark-mode');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
