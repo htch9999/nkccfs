@@ -864,8 +864,38 @@
             justify-content: center;
             gap: 0.5rem;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .header-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .header-btn:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .header-btn:hover:before {
+            opacity: 1;
+        }
+
+        .header-btn i {
+            position: relative;
         }
 
         @media (max-width: 768px) {
@@ -1188,7 +1218,7 @@
         }
 
         .comment-list::-webkit-scrollbar-track {
-            background: rgba(201, 201, 201, 0.097);
+            background: rgba(255, 151, 151, 0.145);
             border-radius: 4px;
         }
 
@@ -1198,10 +1228,10 @@
         }
 
         .comment-item {
-            background: rgba(134, 134, 134, 0.097);
+            background: rgba(110, 110, 110, 0.395);
             padding: 1rem;
             border-radius: 12px;
-            border: 1px solid rgba(158, 158, 158, 0.242);
+            border: 1px solid rgba(110, 110, 110, 0.395);
         }
 
         .comment-form {
@@ -1222,14 +1252,14 @@
             padding: 0.8rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            background: rgba(201, 201, 201, 0.097);
+            background: rgba(110, 110, 110, 0.395);
         }
 
         .comment-form textarea {
             padding: 0.8rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            background: rgba(201, 201, 201, 0.097);
+            background: rgba(110, 110, 110, 0.395);
             min-height: 60px;
             resize: none;
         }
@@ -1252,7 +1282,7 @@
         }
 
         .comment-close:hover {
-            background: rgba(201, 201, 201, 0.097);
+            background: rgba(110, 110, 110, 0.395);
             transform: rotate(90deg);
         }
 
@@ -1266,7 +1296,7 @@
         /* Dark mode adjustments */
         html.dark-mode .comment-form input,
         html.dark-mode .comment-form textarea {
-            background: rgba(201, 201, 201, 0.097);
+            background: rgba(110, 110, 110, 0.395);
         }
 
         .comment-form button:disabled {
@@ -1429,16 +1459,414 @@
         .settings-option input:checked + .slider:before {
             transform: translateX(22px); /* Adjusted from 30px */
         }
+
+        .create-post-btn {
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .create-post-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .create-post-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .create-post-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .create-post-content {
+            background: var(--card-color);
+            width: 90%;
+            max-width: 800px;
+            height: 90vh; /* Changed from max-height to fixed height */
+            overflow-y: auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .create-post-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .create-post-content::-webkit-scrollbar-track {
+            background: rgba(255, 151, 151, 0.145);
+            border-radius: 4px;
+            margin: 1rem;
+        }
+
+        .create-post-content::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .create-post-content::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Adjust form section inside modal */
+        .create-post-modal .form-section {
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        @media (max-height: 600px) {
+            .create-post-content {
+                height: 95vh;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 151, 151, 0.145);
+            transform: rotate(90deg);
+        }
+
+        /* Adjust form-section styles for modal */
+        .create-post-modal .form-section {
+            margin-bottom: 0;
+            max-height: calc(90vh - 2rem);
+            overflow-y: auto;
+        }
+
+        .event-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.rophim.me/images/event_304/behind-hero.webp');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: left center;
+            opacity: 0.7;
+            z-index: 1;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (max-width: 1200px) {
+            .event-background {
+                background-size: 50%;
+                background-position: left center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .event-background {
+                background-size: 60%;
+                background-position: left center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .event-background {
+                background-size: 70%;
+                background-position: left center;
+            }
+        }
+        .learn-more-btn {
+            padding: 0.8rem 1.5rem;
+            background: #ffffff;
+            border: none;
+            border-radius: 10px;
+            color: rgb(0, 0, 0);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            box-shadow: var(--hover-shadow);
+        }
+
+        /* Thêm media queries cho responsive design */
+        @media (max-width: 768px) {
+            header > div:nth-child(2) {
+                padding: 1.5rem !important;
+                transition: padding 0.3s ease-in-out;
+            }
+            
+            header > div:nth-child(2) > div:nth-child(2) > div {
+                width: 80% !important;
+                margin: 0 auto !important;
+                align-items: center !important;
+                text-align: center !important;
+                transition: all 0.3s ease-in-out;
+            }
+            
+            .learn-more-btn {
+                width: 100% !important;
+                max-width: 300px !important;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header > div:nth-child(2) > div:nth-child(2) > div {
+                width: 100% !important;
+                transition: width 0.3s ease-in-out;
+            }
+        }
+        .event-box {
+            background-color: rgba(253,218,167,255);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1.5rem auto;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            width: 100%;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .event-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: flex-end;
+            height: 100%;
+        }
+
+        .event-media {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
+            margin-left: auto;
+        }
+
+        .event-media img {
+            width: 300px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .learn-more-btn {
+            padding: 0.8rem 1.5rem;
+            background: #ffffff;
+            border: none;
+            border-radius: 10px;
+            color: rgb(0, 0, 0);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: fit-content;
+            margin-left: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .event-media {
+                width: 50%;
+            }
+            .event-media img {
+                width: 250px;
+            }
+            .event-background {
+                background-size: 60%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .event-media {
+                width: 45%;
+            }
+            .event-media img {
+                width: 180px;
+            }
+            .event-background {
+                background-size: 60%;
+            }
+        }
+
+        @media (max-width: 660px) {
+            .event-media {
+                width: 40%;
+            }
+            .event-media img {
+                width: 140px;
+            }
+            .event-background {
+                background-size: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .event-media {
+                width: 35%;
+            }
+            .event-media img {
+                width: 120px;
+            }
+            .event-background {
+                background-size: 100%;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .event-media {
+                width: 30%;
+            }
+            .event-media img {
+                width: 100px;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+                font-size: 2rem; /* Giảm cỡ chữ xuống */
+            }
+
+            h1 i {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem; /* Giảm cỡ chữ thêm cho màn hình rất nhỏ */
+            }
+
+            h1 i {
+                font-size: 2.2rem; /* Giảm cỡ icon tương ứng */
+                margin-bottom: 0.4rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container"> 
         <header>
             <h1><i class="fa-solid fa-graduation-cap"></i> Khoai Chau II High School Confessions</h1>
-            <img src="https://www.rophim.me/images/event_304/50y.webp" alt="Subtitle Image" style="max-width: 100%; height: auto; margin-top: 1rem;">
-            <br>
-            <p class="subtitle">Cùng chào mừng kỷ niệm 50 Năm Ngày Giải Phóng Miền Nam - Thống Nhất Đất Nước</p>
-            <p class="subtitle" style="color: rgb(255, 221, 0);">30/04/1975 - 30/04/2025</p>
+            <div class="event-box">
+                <div class="event-background"></div>
+                <div class="event-content">
+                    <div class="event-media">
+                        <img src="https://www.rophim.me/images/event_304/50y.webp" alt="Subtitle Image">
+                        <button class="learn-more-btn" onclick="window.location.href='30-thang-4.html'">
+                            Tìm hiểu thêm về ngày 30/4
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <style>
+                .event-box {
+                    background-color: rgba(253,218,167,255);
+                    padding: 2rem;
+                    border-radius: 15px;
+                    margin: 1.5rem auto;
+                    position: relative;
+                    overflow: hidden;
+                    min-height: 200px;
+                    width: 90%;
+                    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .event-content {
+                    position: relative;
+                    z-index: 2;
+                    display: flex;
+                    justify-content: flex-end;
+                    width: 100%;
+                }
+
+                .event-media {
+                    width: 45%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    justify-content: center;
+                    margin-left: auto;
+                    position: relative;
+                }
+
+                .event-media img {
+                    width: 300px;
+                    height: auto;
+                    object-fit: contain;
+                    margin-bottom: 1rem;
+                }
+
+                
+            </style>
+
+<p class="subtitle">Muốn truy cập vào web nhanh như chớp? Chỉ cần nhớ link rút gọn: <a href="https://bit.ly/nkccfs" style="color: rgb(255, 52, 52); text-decoration: none;">bit.ly/nkccfs</a> ⚡🚀</p>
 
             <div class="header-buttons">
                 <button class="header-btn" id="featuresBtn">
@@ -1462,37 +1890,13 @@
                 <i class="fas fa-scroll"></i>
                 <span id="totalConfessions">0</span> Bài đăng
             </div>
+            <br>
+            <button class="create-post-btn" id="createPostBtn">
+                <i class="fas fa-plus"></i> Tạo bài đăng mới
+            </button>
         </header>
         
         <main>
-            <section class="form-section">
-                <div class="form-header">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <h2>Tạo một bài đăng mới</h2>
-                </div>
-                <form id="confessionForm">
-                    <div class="form-group">
-                        <label for="name"><i class="fas fa-user-secret"></i> Tên của bạn (tuỳ chọn)</label>
-                        <input type="text" id="name" name="name" placeholder="Ẩn danh">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="confession"><i class="fas fa-heart"></i> Nội dung</label>
-                        <div class="reply-text-mask"></div>
-                        <div class="reply-tag-overlay"></div>
-                        <textarea id="confession" name="confession" rows="4" 
-                            placeholder="Nội dung bài đăng của bạn..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Đăng!
-                    </button>
-                    <p class="submission-notice">
-                        <i class="fas fa-exclamation-circle"></i>
-                        Vui lòng đăng bài với thái độ tôn trọng. Không sử dụng từ ngữ phân biệt, miệt thị hoặc thô tục. Nếu vi phạm, bài đăng sẽ được kiểm duyệt và xoá bỏ.</ap>
-                </form>
-            </section>
-
             <section class="confessions-section" id="confessions">
                 <div class="section-header">
                     <h2><i class="fa-solid fa-share-from-square"></i> Các bài đăng</h2>
@@ -1502,7 +1906,7 @@
         </main>
         
         <footer>
-            <p><i class="fas fa-lock"></i> Bài đăng của bạn được giữ an toàn với chúng tôi</p>
+            <p><i class="fa-regular fa-copyright"></i> 2025 - Khoai Chau II Confession.</p>
         </footer>
     </div>
     
@@ -1535,6 +1939,41 @@
                 </div>
                 <textarea id="commentContent" placeholder="Viết bình luận của bạn..." required></textarea>
             </form>
+        </div>
+    </div>
+
+    <div id="createPostModal" class="create-post-modal">
+        <div class="create-post-content">
+            <button class="modal-close" id="closePostModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <section class="form-section">
+                <div class="form-header">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <h2>Tạo một bài đăng mới</h2>
+                </div>
+                <form id="confessionForm">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user-secret"></i> Tên của bạn (tuỳ chọn)</label>
+                        <input type="text" id="name" name="name" placeholder="Ẩn danh">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confession"><i class="fas fa-heart"></i> Nội dung</label>
+                        <div class="reply-text-mask"></div>
+                        <div class="reply-tag-overlay"></div>
+                        <textarea id="confession" name="confession" rows="4" 
+                            placeholder="Nội dung bài đăng của bạn..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Đăng!
+                    </button>
+                    <p class="submission-notice">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Vui lòng đăng bài với thái độ tôn trọng. Không sử dụng từ ngữ phân biệt, miệt thị hoặc thô tục. Nếu vi phạm, bài đăng sẽ được kiểm duyệt và xoá bỏ.</ap>
+                </form>
+            </section>
         </div>
     </div>
 
@@ -2410,7 +2849,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     changelogBtn.addEventListener('click', () => {
         showModal('Nhật ký sửa đổi', `
-            <p class="changelog-version"><strong>Siêu cập nhật 03/04/2025</strong></p>
+        <p class="changelog-version"><strong>Bản cập nhật 05/04/2025</strong></p>
+            <ul>
+                <li><i class="fas fa-plus"></i> Cải thiện lại một vài tính năng, chức năng</li>
+                <li><i class="fas fa-plus"></i> Giản lược phần đăng bài cho gọn gàng hơn</li>
+                <li><i class="fas fa-plus"></i> Cải thiện hiệu suất và nâng cấp nhỏ cho UI/UX</li>
+                <li><i class="fas fa-plus"></i> Giờ thì bạn có thể tìm hiểu thêm một chút về lịch sử của ngày 30 tháng 4 ❤️</li>
+                <p></p>
+            </ul>
+            <p class="changelog-version"><strong>---------------------------------------</strong></p>
+            <p class="changelog-version"><strong>Bản cập nhật 03/04/2025</strong></p>
             <ul>
                 <li><i class="fas fa-plus"></i> Thêm tính năng bình luận</li>
                 <li><i class="fas fa-plus"></i> Thêm một vài chức năng: Cài đặt, Về chúng tôi,..</li>
@@ -2420,12 +2868,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </ul>
             <p class="changelog-version"><strong>---------------------------------------</strong></p>
             <p class="changelog-version"><strong>Bản cập nhật 29/03/2025</strong></p>
-            <ul>
-                <li><i class="fas fa-plus"></i> Thay đổi màu nền chủ đạo thành màu tím (vì t thích🙃)</li>
-                <li><i class="fas fa-plus"></i> Thêm tính năng trả lời bài đăng</li>
                 <li><i class="fas fa-plus"></i> Thêm các nút Hướng dẫn chức năng, Nhật kí sửa đổi</li>
                 <li><i class="fas fa-plus"></i> Cải thiện một số tính năng, vấn đề bảo mật và hiệu suất</li>
-                <p></p>
+                <p></p>class="fas fa-plus"></i> Thêm tính năng trả lời bài đăng</li>
             </ul>
             <p class="changelog-version"><strong>---------------------------------------</strong></p>
              <p class="changelog-version"><strong>Bản cập nhật 25/03/2025</strong></p>
@@ -2548,7 +2993,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .settings-option {
             margin: 1rem 0;
             padding: 0.8rem;
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(108, 92, 231, 0.1);
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
@@ -2866,63 +3311,7 @@ document.getElementById('commentForm').addEventListener('submit', async (e) => {
     }
 });
 
-// Remove any other duplicate comment form submission handlers
-// ...rest of existing code...
-
-// Remove all other comment form event listeners and keep only this one
-document.getElementById('commentForm').onsubmit = async function(e) {
-    e.preventDefault();
-    
-    // Prevent double submission
-    if (this.hasAttribute('data-submitting')) return;
-    this.setAttribute('data-submitting', 'true');
-    
-    const submitBtn = this.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    
-    const confessionId = document.getElementById('confessionId').value;
-    const nameInput = document.getElementById('commentName');
-    const commentInput = document.getElementById('commentContent');
-    
-    try {
-        const commentData = {
-            type: 'comment',
-            confessionId: confessionId,
-            name: nameInput.value.trim() || 'Người dùng ẩn danh',
-            comment: commentInput.value.trim(),
-            timestamp: new Date().toISOString()
-        };
-        
-        if (!commentData.comment) return;
-
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(commentData)
-        });
-
-        commentInput.value = '';
-        
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await loadComments(confessionId);
-        
-    } catch (error) {
-        console.error('Comment submission error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Lỗi',
-            text: 'Không thể đăng bình luận. Vui lòng thử lại sau.'
-        });
-    } finally {
-        this.removeAttribute('data-submitting');
-        submitBtn.disabled = false;
-    }
-};
-
-// Remove any duplicate event listeners or functions related to comment submission
+// Remove all other comment form related event listeners
 // ...rest of existing code...
 
 // Replace all comment form submission handlers with this single one
@@ -3185,6 +3574,50 @@ aboutBtn.addEventListener('click', () => {
             </ul>
         </div>
     `, 'Đóng');
+});
+
+// ...existing code...
+
+// Add this near the start of your main script
+document.addEventListener('DOMContentLoaded', function() {
+    const createPostBtn = document.getElementById('createPostBtn');
+    const createPostModal = document.getElementById('createPostModal');
+    const closePostModal = document.getElementById('closePostModal');
+
+    // Open create post modal
+    createPostBtn.addEventListener('click', () => {
+        createPostModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+
+    // Close modal when clicking the close button
+    closePostModal.addEventListener('click', () => {
+        createPostModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Close modal when clicking outside
+    createPostModal.addEventListener('click', (e) => {
+        if (e.target === createPostModal) {
+            createPostModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && createPostModal.classList.contains('active')) {
+            createPostModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Close modal after successful post submission
+    const confessionForm = document.getElementById('confessionForm');
+    confessionForm.addEventListener('submit', () => {
+        createPostModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
 });
 
 // ...existing code...
