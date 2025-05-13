@@ -10,27 +10,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #e74c3c;       /* Red */
-            --secondary-color: #f1c40f;     /* Yellow */
-            --background-color: #fff5f5;    /* Light red tint */
-            --text-color: #333333;
-            --card-color: #ffffff;
-            --accent-color: #f39c12;        /* Orange-yellow */
-            --shadow: 0 4px 6px rgba(231, 76, 60, 0.1);
-            --hover-shadow: 0 8px 15px rgba(231, 76, 60, 0.15);
-            --border-color: #ddd;
+            --primary-color: #a266da; /* Deep Purple */
+            --secondary-color: #926ddb; /* Medium Purple */
+            --text-color: #333;
+            --card-color: #fff;
+            --border-color: rgba(138, 43, 226, 0.2); /* Transparent Deep Purple */
+            --shadow: 0 4px 6px rgba(138, 43, 226, 0.1);
+            --hover-shadow: 0 8px 15px rgba(138, 43, 226, 0.2);
+            background-color: #E6E6FA; /* Pastel Purple background */
         }
 
         html.dark-mode {
-            --primary-color: #ff6b6b;       /* Lighter red */
-            --secondary-color: #ffd93d;     /* Brighter yellow */
-            --background-color: #1a1a1a;
-            --text-color: #ffffff;
+            --primary-color: #b187d9; /* Medium Purple for dark mode */
+            --secondary-color: #a78cdd; /* Deep Purple for dark mode */
+            --text-color: #E6E6FA;
             --card-color: #2d2d2d;
-            --accent-color: #ffa502;        /* Orange */
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-            --border-color: #404040;
+            --border-color: rgba(147, 112, 219, 0.2); /* Transparent Medium Purple */
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            background-color: #1a1a1a;
         }
 
         * {
@@ -142,7 +140,7 @@
         }
 
         html.dark-mode .reply-tag-overlay {
-            background: #333;
+            background: #333333;
         }
 
         html.dark-mode .reply-text-mask {
@@ -551,11 +549,11 @@
             background: white;
             padding: 25px;
             border-radius: 15px;
-            border-top: 4px solid #ff4d6d;
+            border-top: 4px solid #a64dff;
         }
 
         .confession-card-for-image h3 {
-            color: #ff4d6d;
+            color: #b187d9;
             font-size: 1.2rem;
             margin-bottom: 15px;
             display: flex;
@@ -584,7 +582,7 @@
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid #eee;
-            color: #ff4d6d;
+            color: #b187d9;
             font-size: 0.9rem;
             word-break: break-all;
         }
@@ -749,11 +747,11 @@
             font-weight: 500;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(203, 151, 255, 0.145);
         }
 
         html.dark-mode .confession-id {
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(203, 151, 255, 0.145);
         }
 
         footer {
@@ -777,13 +775,13 @@
             font-weight: 500;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(205, 151, 255, 0.145);
             margin-bottom: 1rem;
             display: inline-block;
         }
 
         html.dark-mode .reply-tag {
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(205, 151, 255, 0.145);
         }
 
         .reply-preview {
@@ -1107,7 +1105,7 @@
             padding: 0.8rem;
             border: none;
             border-radius: 25px;
-            background: #ff6b6b;
+            background: #b187d9;
             color: rgb(255, 255, 255);
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
@@ -1218,7 +1216,7 @@
         }
 
         .comment-list::-webkit-scrollbar-track {
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(193, 151, 255, 0.145);
             border-radius: 4px;
         }
 
@@ -1228,10 +1226,10 @@
         }
 
         .comment-item {
-            background: rgba(110, 110, 110, 0.395);
+            background: rgba(158, 95, 217, 0.1); /* Light purple background */
             padding: 1rem;
             border-radius: 12px;
-            border: 1px solid rgba(110, 110, 110, 0.395);
+            border: 1px solid rgba(138, 43, 226, 0.2);
         }
 
         .comment-form {
@@ -1252,14 +1250,14 @@
             padding: 0.8rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            background: rgba(110, 110, 110, 0.395);
+            background: rgba(138, 43, 226, 0.1); /* Light purple background */
         }
 
         .comment-form textarea {
             padding: 0.8rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            background: rgba(110, 110, 110, 0.395);
+            background: rgba(138, 43, 226, 0.1); /* Light purple background */
             min-height: 60px;
             resize: none;
         }
@@ -1382,9 +1380,9 @@
         .settings-option {
             margin: 1rem 0;
             padding: 1rem;
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(138, 43, 226, 0.1); /* Light purple background */
             border-radius: 12px;
-            border: 1px solid rgba(255, 151, 151, 0.145);
+            border: 1px solid rgba(138, 43, 226, 0.2);
         }
 
         .settings-option label {
@@ -1411,7 +1409,7 @@
         }
 
         html.dark-mode .settings-option {
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(212, 151, 255, 0.145);
         }
 
         /* Settings Modal Switch Styles */
@@ -1523,7 +1521,7 @@
         }
 
         .create-post-content::-webkit-scrollbar-track {
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(210, 151, 255, 0.145);
             border-radius: 4px;
             margin: 1rem;
         }
@@ -1669,7 +1667,7 @@
             }
         }
         .event-box {
-            background-color: rgba(253,218,167,255);
+            background-color: rgba(147, 112, 219, 0.2); /* Light purple background */
             padding: 2rem;
             border-radius: 15px;
             margin: 1.5rem auto;
@@ -1809,7 +1807,8 @@
     <div class="container"> 
         <header>
             <h1><i class="fa-solid fa-graduation-cap"></i> Khoai Chau II High School Confessions</h1>
-            <div class="event-box">
+            <h1></h1>
+<!--             <div class="event-box">
                 <div class="event-background"></div>
                 <div class="event-content">
                     <div class="event-media">
@@ -1820,7 +1819,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
 
             <style>
@@ -1866,7 +1865,7 @@
                 
             </style>
 
-<p class="subtitle">Muốn truy cập vào web nhanh như cướp? Chỉ cần nhớ link rút gọn: <a href="https://bit.ly/nkccfs" style="color: rgb(255, 52, 52); text-decoration: none;">bit.ly/nkccfs</a> ⚡🚀</p>
+<p class="subtitle">⚡🚀 Muốn truy cập vào web nhanh như ăn cướp? Chỉ cần nhớ link rút gọn: <a href="https://bit.ly/nkccfs" style="color: rgb(255, 52, 52); text-decoration: none;">bit.ly/nkccfs</a></p>
 
             <div class="header-buttons">
                 <button class="header-btn" id="featuresBtn">
@@ -1906,7 +1905,7 @@
         </main>
         
         <footer>
-            <p>2025 <i class="fa-regular fa-copyright"></i> Khoai Chau II Confession. All rights reserved.</p>
+            <p><i class="fa-regular fa-copyright"></i> 2025 - Khoai Chau II Confession. All rights reserved.</p>
         </footer>
     </div>
     
@@ -1980,6 +1979,30 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
+        // Toast notification helper function
+        function showToast(icon, title, timer = 2000) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: timer,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                },
+                customClass: {
+                    popup: 'animated-toast',
+                    title: 'toast-title'
+                }
+            });
+
+            return Toast.fire({
+                icon: icon,
+                title: title
+            });
+        }
+
         const form = document.getElementById('confessionForm');
 const confessionList = document.getElementById('confessionList');
 
@@ -2031,39 +2054,12 @@ form.addEventListener('submit', e => {
         body: JSON.stringify(formDataObj)
     })
     .then(() => {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            width: '300px',
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            },
-            customClass: {
-                popup: 'animated-toast',
-                title: 'toast-title'
-            }
-        });
-
-        Toast.fire({
-            icon: 'success',
-            title: `<i class="fas fa-heart heart-icon"></i> Bài đăng của bạn đã được chia sẻ`
-        }).then(() => {
-            // Reload sau 1 giây để đảm bảo dữ liệu được lưu
-            setTimeout(() => window.location.reload(), 500);
-        });
+        showToast('success', '<i class="fas fa-heart heart-icon"></i> Bài đăng của bạn đã được chia sẻ');
+        setTimeout(() => window.location.reload(), 500);
     })
     .catch(error => {
         console.error('Error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Đã xảy ra lỗi khi đăng bài',
-            confirmButtonColor: '#6c5ce7'
-        });
+        showToast('error', 'Đã xảy ra lỗi khi đăng bài');
     });
 });
 
@@ -2089,27 +2085,7 @@ function shareConfession(name, confession, timestamp) {
     } else {
         // Fallback: Copy to clipboard
         navigator.clipboard.writeText(shareText).then(() => {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-right',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                width: '300px',
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                },
-                customClass: {
-                    popup: 'animated-toast',
-                    title: 'toast-title'
-                }
-            });
-
-            Toast.fire({
-                icon: 'success',
-                title: `<i class="fas fa-copy"></i> Sao chép vào clipboard`
-            });
+            showToast('success', '<i class="fas fa-copy"></i> Sao chép vào clipboard');
         });
     }
 }
@@ -2331,37 +2307,11 @@ async function shareConfessionLink(name, confession, timestamp, id) {
         } else {
             await navigator.clipboard.writeText(shareText);
             
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-right',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                width: '300px',
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                },
-                customClass: {
-                    popup: 'animated-toast',
-                    title: 'toast-title'
-                }
-            });
-
-            Toast.fire({
-                icon: 'success',
-                title: `<i class="fas fa-copy"></i> Đã sao chép liên kết vào clipboard`
-            });
+            showToast('success', '<i class="fas fa-copy"></i> Đã sao chép liên kết vào clipboard');
         }
     } catch (error) {
         console.error('Lỗi chia sẻ:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Âu nâu...',
-            text: 'Chia sẻ bài đăng thất bại',
-            timer: 2000,
-            showConfirmButton: false
-        });
+        showToast('error', 'Chia sẻ bài đăng thất bại');
     }
 }
 
@@ -2414,39 +2364,11 @@ async function downloadConfessionImage(name, confession, timestamp, id) {
         link.download = 'confession.png';
         link.click();
         
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            width: '300px',
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            },
-            customClass: {
-                popup: 'animated-toast',
-                title: 'toast-title'
-            }
-        });
-
-        Toast.fire({
-            icon: 'success',
-            title: `<i class="fas fa-download"></i> Đã tải ảnh xuống!`
-        }).then(() => {
-            Swal.close(); // Force close after timer completes
-        });
+        showToast('success', '<i class="fas fa-download"></i> Đã tải ảnh xuống!');
 
     } catch (error) {
         console.error('Lỗi:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Âu nâu...',
-            text: 'Tạo ảnh thất bại :(',
-            timer: 2000,
-            showConfirmButton: false
-        });
+        showToast('error', 'Tạo ảnh thất bại :(');
     }
 }
 
@@ -2849,6 +2771,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     changelogBtn.addEventListener('click', () => {
         showModal('Nhật ký sửa đổi', `
+        <p class="changelog-version"><strong>Bản cập nhật 13/05/2025</strong></p>
+            <ul>
+                <li><i class="fas fa-plus"></i> Ad thích màu tím:)) (maybe)</li>
+                <p></p>
+            </ul>
+        <p class="changelog-version"><strong>---------------------------------------</strong></p>
         <p class="changelog-version"><strong>Bản cập nhật 05/04/2025</strong></p>
             <ul>
                 <li><i class="fas fa-plus"></i> Cải thiện lại một vài tính năng, chức năng</li>
@@ -2857,8 +2785,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <li><i class="fas fa-plus"></i> Giờ thì bạn có thể tìm hiểu thêm một chút về lịch sử của ngày 30 tháng 4 ❤️</li>
                 <p></p>
             </ul>
-            <p class="changelog-version"><strong>---------------------------------------</strong></p>
-            <p class="changelog-version"><strong>Bản cập nhật 03/04/2025</strong></p>
+        <p class="changelog-version"><strong>---------------------------------------</strong></p>
+        <p class="changelog-version"><strong>Bản cập nhật 03/04/2025</strong></p>
             <ul>
                 <li><i class="fas fa-plus"></i> Thêm tính năng bình luận</li>
                 <li><i class="fas fa-plus"></i> Thêm một vài chức năng: Cài đặt, Về chúng tôi,..</li>
@@ -2866,16 +2794,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <li><i class="fas fa-plus"></i> Nền chủ đạo đã được thay đổi. Hãy thử khám phá nó nhé!</li>
                 <p></p>
             </ul>
-            <p class="changelog-version"><strong>---------------------------------------</strong></p>
-            <p class="changelog-version"><strong>Bản cập nhật 29/03/2025</strong></p>
+        <p class="changelog-version"><strong>---------------------------------------</strong></p>
+        <p class="changelog-version"><strong>Bản cập nhật 29/03/2025</strong></p>
             <ul>
                 <li><i class="fas fa-plus"></i> Thêm các nút Hướng dẫn chức năng, Nhật kí sửa đổi</li>
                 <li><i class="fas fa-plus"></i> Cải thiện một số tính năng, vấn đề bảo mật và hiệu suất</li>
                 <li><i class="fas fa-plus"></i> Thêm tính năng trả lời bài đăng</li>
                 <p></p>
             </ul>
-            <p class="changelog-version"><strong>---------------------------------------</strong></p>
-             <p class="changelog-version"><strong>Bản cập nhật 25/03/2025</strong></p>
+        <p class="changelog-version"><strong>---------------------------------------</strong></p>
+        <p class="changelog-version"><strong>Bản cập nhật 25/03/2025</strong></p>
             <ul>
                 <li><i class="fas fa-star"></i> Ra mắt website</li>
                 <li><i class="fas fa-plus"></i> Thêm tính năng đăng bài</li>
@@ -3021,7 +2949,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         html.dark-mode .settings-option {
-            background: rgba(255, 151, 151, 0.145);
+            background: rgba(194, 129, 255, 0.044);
         }
     `;
     document.head.appendChild(settingsStyle);
@@ -3137,25 +3065,7 @@ document.getElementById('commentForm').addEventListener('submit', async (e) => {
         
         document.getElementById('commentContent').value = '';
         
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            },
-            customClass: {
-                popup: 'animated-toast'
-            }
-        });
-        
-        Toast.fire({
-            icon: 'success',
-            title: 'Đã đăng bình luận!'
-        });
+        showToast('success', 'Đã đăng bình luận!');
 
         // Add artificial delay before reloading comments
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -3163,11 +3073,7 @@ document.getElementById('commentForm').addEventListener('submit', async (e) => {
         
     } catch (error) {
         console.error('Comment submission error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Lỗi',
-            text: 'Không thể đăng bình luận. Vui lòng thử lại sau.'
-        });
+        showToast('error', 'Không thể đăng bình luận. Vui lòng thử lại sau.');
     } finally {
         // Remove loading state
         form.classList.remove('submitting');
@@ -3283,33 +3189,14 @@ document.getElementById('commentForm').addEventListener('submit', async (e) => {
         document.getElementById('commentContent').value = '';
         
         // Show success toast
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        
-        Toast.fire({
-            icon: 'success',
-            title: 'Đã đăng bình luận!'
-        });
+        showToast('success', 'Đã đăng bình luận!');
 
         // Use the defined loadComments function
         setTimeout(() => loadComments(confessionId), 1000);
         
     } catch (error) {
         console.error('Comment submission error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Lỗi',
-            text: 'Không thể đăng bình luận. Vui lòng thử lại sau.'
-        });
+        showToast('error', 'Không thể đăng bình luận. Vui lòng thử lại sau.');
     }
 });
 
@@ -3364,22 +3251,7 @@ document.addEventListener('DOMContentLoaded', function() {
             commentInput.value = '';
             
             // Show success message
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-right',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
-            
-            Toast.fire({
-                icon: 'success',
-                title: 'Đã đăng bình luận!'
-            });
+            showToast('success', 'Đã đăng bình luận!');
 
             // Reload comments after a short delay
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -3387,11 +3259,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             console.error('Comment submission error:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Lỗi',
-                text: 'Không thể đăng bình luận. Vui lòng thử lại sau.'
-            });
+            showToast('error', 'Không thể đăng bình luận. Vui lòng thử lại sau.');
         } finally {
             this.classList.remove('submitting');
             submitBtn.disabled = false;
@@ -3445,8 +3313,8 @@ aboutStyles.textContent = `
         margin-bottom: 1.5rem;
         padding: 1rem;
         border-radius: 10px;
-        background: rgba(255, 170, 170, 0.133);
-        border: 1px solid rgba(255, 170, 170, 0.133);
+        background: rgba(194, 129, 255, 0.044);
+        border: 1px solid rgba(194, 129, 255, 0.044);
     }
 
     .about-section:last-child {
