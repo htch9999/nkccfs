@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khoai Chau II High School Confessions</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #a266da; /* Deep Purple */
-            --secondary-color: #926ddb; /* Medium Purple */
+            --primary-color: #a266da;
+            --secondary-color: #926ddb;
             --text-color: #333;
             --card-color: #fff;
-            --border-color: rgba(138, 43, 226, 0.2); /* Transparent Deep Purple */
+            --border-color: rgba(138, 43, 226, 0.2);
             --shadow: 0 4px 6px rgba(138, 43, 226, 0.1);
             --hover-shadow: 0 8px 15px rgba(138, 43, 226, 0.2);
-            background-color: #E6E6FA; /* Pastel Purple background */
+            --background-color: #E6E6FA;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         html.dark-mode {
-            --primary-color: #b187d9; /* Medium Purple for dark mode */
-            --secondary-color: #a78cdd; /* Deep Purple for dark mode */
+            --primary-color: #b187d9;
+            --secondary-color: #a78cdd;
             --text-color: #E6E6FA;
             --card-color: #2d2d2d;
-            --border-color: rgba(147, 112, 219, 0.2); /* Transparent Medium Purple */
+            --border-color: rgba(147, 112, 219, 0.2);
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-            background-color: #1a1a1a;
+            --background-color: #1a1a1a;
         }
 
         * {
@@ -42,568 +42,55 @@
             line-height: 1.6;
             background-color: var(--background-color);
             color: var(--text-color);
+            transition: var(--transition);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         /* Header Styles */
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem 0;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             color: var(--primary-color);
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-        }
-
-        h1 i {
-            font-size: 2rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .subtitle {
-            color: var (--secondary-color);
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        /* Remove .header-controls styles since we're not using it anymore */
-        .header-controls {
-            display: none;
-        }
-
-        /* Form Styles */
-        .form-section {
-            background: var(--card-color);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            margin-bottom: 3rem;
-            transition: transform 0.3s ease;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-        }
-
-        .form-section:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .form-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .reply-tag-overlay {
-            position: absolute;
-            pointer-events: none;
-            font-family: monospace;
             color: var(--secondary-color);
-            font-size: 0.9rem;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
             font-weight: 500;
-            padding: 0.2rem 0.5rem;
-            margin: 1rem;
-            background: rgb(248, 249, 250);
-            border-radius: 4px;
-            display: none;
-            z-index: 2;
+            margin: 1rem 0;
+            line-height: 1.5;
         }
 
-        /* Thêm style cho container của textarea */
-        .form-group {
-            position: relative;
-        }
-
-        /* Thêm style cho vùng che phủ text */
-        .reply-text-mask {
-            position: absolute;
-            background: rgb(248, 249, 250);
-            height: calc(1.8rem + 4px); /* Chính xác chiều cao của overlay */
-            display: none;
-            margin: 1rem;
-            z-index: 1;
-            border-radius: 4px; /* Đồng bộ với overlay */
-        }
-
-        html.dark-mode .reply-tag-overlay {
-            background: #333333;
-        }
-
-        html.dark-mode .reply-text-mask {
-            background: #333;
-        }
-
-        label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-            font-weight: 500;
-        }
-
-        label i {
-            color: var(--primary-color);
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background-color: #f8f9fa;
-            color: var(--text-color);
-        }
-
-        html.dark-mode input, 
-        html.dark-mode textarea {
-            background-color: #333;
-            border-color: #404040;
-            color: #fff;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            background-color: white;
-        }
-
-        html.dark-mode input:focus, 
-        html.dark-mode textarea:focus {
-            background-color: #404040;
-            border-color: var(--primary-color);
-        }
-
-        .submit-btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
+        .subtitle a {
+            color: rgb(255, 52, 52);
+            text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            letter-spacing: 0.5px;
+            transition: var(--transition);
         }
 
-        .submit-btn:hover {
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            transform: translateY(-2px);
+        .subtitle a:hover {
+            text-decoration: underline;
         }
 
-        /* Confessions Section */
-        .confessions-section {
-            margin-top: 3rem;
-        }
-
-        .confessions-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .confession-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        }
-
-        .confession-item {
-            background: var(--card-color);
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border-top: 4px solid var(--primary-color);
-            position: relative;
-            min-height: 150px;
-            padding-bottom: 4rem;
-        }
-
-        .confession-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .confession-item p {
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-
-        .confession-item strong {
-            color: var(--primary-color);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .confession-footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--card-color);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            border-radius: 0 0 20px 20px;
-        }
-
-        html.dark-mode .confession-footer {
-            background: rgba(45, 45, 45, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .timestamp {
-            color: var(--text-color);
-            opacity: 0.7;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        html.dark-mode .timestamp {
-            color: #ddd;
-        }
-
-        .error-message, .no-confessions {
-            text-align: center;
-            padding: 2rem;
-            background: var(--card-color);
-            border-radius: 10px;
-            color: var (--secondary-color);
-            grid-column: 1 / -1;
-        }
-
-        .error-message i, .no-confessions i {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            grid-column: 1 / -1;
-        }
-
-        .loading i {
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-
-        .confession-counter {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            box-shadow: var(--shadow);
-        }
-
-        .confession-counter i {
-            font-size: 1.2rem;
-        }
-
-        .confession-counter span {
-            font-weight: 700;
-            font-size: 1.3rem;
-        }
-
-        /* Custom SweetAlert Styles */
-        .swal2-popup {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px) !important;
-            border-radius: 20px !important;
-            padding: 2rem !important;
-            border: 1px solid rgba(108, 92, 231, 0.1) !important;
-        }
-
-        .swal2-title {
-            color: var(--primary-color) !important;
-            font-family: 'Poppins', sans-serif !important;
-            font-size: 1.8rem !important;
-            font-weight: 600 !important;
-        }
-
-        .swal2-html-container {
-            color: var(--text-color) !important;
-            font-family: 'Poppins', sans-serif !important;
-            font-size: 1.1rem !important;
-        }
-
-        .swal2-icon {
-            border-color: var(--primary-color) !important;
-            color: var(--primary-color) !important;
-        }
-
-        .swal2-success-ring {
-            border-color: var(--primary-color) !important;
-        }
-
-        .swal2-success-line-tip,
-        .swal2-success-line-long {
-            background-color: var(--primary-color) !important;
-        }
-
-        .swal2-timer-progress-bar {
-            background: var(--primary-color) !important;
-        }
-
-        /* Animation for form submission */
-        @keyframes sendConfession {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(0.95);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .form-sending {
-            animation: sendConfession 1s ease infinite;
-        }
-
-        /* Success animation */
-        @keyframes successPop {
-            0% {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .swal2-show {
-            animation: successPop 0.5s ease !important;
-        }
-
-        .swal2-hide {
-            animation: successPop 0.5s ease reverse !important;
-        }
-
-        /* Add these styles for the toast notification */
-        .animated-toast {
-            padding: 0.5rem 1rem !important;
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px) !important;
-            border-left: 4px solid var(--primary-color) !important;
-        }
-
-        .toast-title {
-            font-size: 1rem !important;
-            display: flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-        }
-
-        .heart-icon {
-            color: #ff4d6d;
-            animation: heartBeat 1s ease infinite;
-        }
-
-        @keyframes heartBeat {
-            0% {
-                transform: scale(1);
-            }
-            14% {
-                transform: scale(1.3);
-            }
-            28% {
-                transform: scale(1);
-            }
-            42% {
-                transform: scale(1.3);
-            }
-            70% {
-                transform: scale(1);
-            }
-        }
-
-        /* Override some SweetAlert styles for toast */
-        .swal2-toast {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-            border-radius: 8px !important;
-        }
-
-        .swal2-toast .swal2-title {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .swal2-toast .swal2-icon {
-            display: none !important;
-        }
-
-        /* Add these styles for the share button and footer */
-        .confession-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem;
-            border-radius: 10px;
-        }
-
-        .share-btn {
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            padding: 0.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: all 0.3s ease;
-            border-radius: 50%;
-        }
-
-        .share-btn:hover {
-            background: rgba(255, 180, 180, 0.09);
-            transform: translateY(-2px);
-        }
-
-        .share-btn i {
-            font-size: 0.9rem;
-        }
-
-        /* Update form-header styles */
-        .form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-        }
-
-        .form-header i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-header h2 {
-            font-size: 1.5rem;
-            color: var(--text-color);
-        }
-
-        /* Styles for the confession card image */
-        .confession-card-for-image {
-            position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 600px;
-            padding: 20px;
-            background: #fff0f3;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .confession-card-for-image .card-content {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            border-top: 4px solid #a64dff;
-        }
-
-        .confession-card-for-image h3 {
-            color: #b187d9;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .confession-card-for-image .confession-text {
-            color: #1a1a1a;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .confession-card-for-image .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-
-        .confession-card-for-image .card-link {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            color: #b187d9;
-            font-size: 0.9rem;
-            word-break: break-all;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .button-group .share-btn {
-            padding: 0.5rem;
-        }
-
-        .form-section, .confession-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-        }
-
-        /* Theme Toggle Switch Styles */
+        /* Theme Toggle */
         .theme-toggle-wrapper {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
@@ -630,13 +117,15 @@
             right: 0;
             bottom: 0;
             background-color: #3f3f3f;
-            transition: .4s;
+            transition: var(--transition);
             border-radius: 30px;
         }
 
         .slider:before {
             position: absolute;
-            content: "";
+            content: "\f185";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -644,241 +133,62 @@
             width: 22px;
             left: 4px;
             bottom: 4px;
-            background-color: rgb(255, 255, 255);
-            transition: .4s;
+            background-color: white;
+            transition: var(--transition);
             border-radius: 50%;
-        }
-
-        .slider:before {
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            content: "\f185"; /* moon icon */
             color: #3f3f3f;
             font-size: 12px;
         }
 
-        input:checked + .slider:before {
-            transform: translateX(30px);
-            content: "\f186"; /* sun icon */
-            color: var(--primary-color);
-        }
-
-        /* Remove old theme toggle styles */
-        .theme-toggle {
-            display: none;
-        }
-
-        /* Adjust for dark mode */
-        html.dark-mode .slider {
+        input:checked + .slider {
             background-color: var(--primary-color);
         }
 
-        html.dark-mode .slider:before {
-            background-color: var(--card-color);
-        }
-
-        /* Like button styles */
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .like-btn {
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .like-btn i {
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .like-btn:hover {
-            background: rgba(108, 92, 231, 0.15);
-        }
-
-        .like-btn:hover i {
-            transform: scale(1.2);
-        }
-
-        .like-btn.liked {
+        input:checked + .slider:before {
+            transform: translateX(30px);
+            content: "\f186";
             color: var(--primary-color);
         }
 
-        .like-btn.liked i {
-            animation: likeAnimation 0.3s ease;
-        }
-
-        @keyframes likeAnimation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4); }
-            100% { transform: scale(1); }
-        }
-
-        html.dark-mode .like-btn {
-            color: #ddd;
-        }
-
-        html.dark-mode .like-btn.liked {
-            color: var(--primary-color);
-        }
-
-        /* Confession Header Styles */
-        .confession-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .confession-id {
-            font-family: monospace;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            background: rgba(203, 151, 255, 0.145);
-        }
-
-        html.dark-mode .confession-id {
-            background: rgba(203, 151, 255, 0.145);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem;
-            color: var(--text-color);
-        }
-
-        footer p {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            opacity: 0.8;
-        }
-
-        .reply-tag {
-            font-family: monospace;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            background: rgba(205, 151, 255, 0.145);
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        html.dark-mode .reply-tag {
-            background: rgba(205, 151, 255, 0.145);
-        }
-
-        .reply-preview {
-            display: none;
-            margin-bottom: 0.5rem;
-        }
-
-        .reply-preview.active {
-            display: block;
-        }
-
-        .reply-btn:hover {
-            color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        .reply-btn.active {
-            color: var(--secondary-color);
-        }
-
-        .reply-preview-box {
-            font-family: monospace;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0.2rem 0.5rem;
-            background: rgba(255, 151, 151, 0.145);
-            border-radius: 4px;
-            margin-bottom: 4px;
-            display: inline-block;
-        }
-
-        html.dark-mode .reply-preview-box {
-            background: rgba(255, 151, 151, 0.145);
-        }
-        
-        .submission-notice {
-            margin-top: 1rem;
-            padding: 0.8rem;
-            border-radius: 8px;
-            background: rgba(255, 65, 65, 0.312);
-            color: var(--text-color);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        html.dark-mode .submission-notice {
-            background: rgba(255, 65, 65, 0.312);
-        }
-
-        /* Header Button Styles */
+        /* Header Buttons */
         .header-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            padding: 0 1rem;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
         .header-btn {
-            flex: 1;
-            min-width: 200px;
-            max-width: 300px;
-            padding: 0.8rem 1.5rem;
+            flex: 1 1 auto;
+            min-width: 140px;
+            max-width: 200px;
+            padding: 0.7rem 1.2rem;
             border: none;
             border-radius: 20px;
             background: var(--card-color);
             color: var(--primary-color);
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             box-shadow: var(--shadow);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
-            z-index: 1;
         }
 
         .header-btn:before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: var(--transition);
             z-index: -1;
         }
 
@@ -892,212 +202,442 @@
             opacity: 1;
         }
 
-        .header-btn i {
+        .header-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Confession Counter */
+        .confession-counter {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .confession-counter:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .confession-counter:active {
+            transform: translateY(0);
+        }
+
+        /* Create Post Button */
+        .create-post-btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .create-post-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .create-post-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--card-color);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-header h2 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
             position: relative;
         }
 
-        @media (max-width: 768px) {
-            .header-buttons {
-                padding: 0 0.5rem;
+        label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        label i {
+            color: var(--primary-color);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: var(--card-color);
+            color: var(--text-color);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(162, 102, 218, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submission-notice {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            background: rgba(255, 65, 65, 0.1);
+            color: var(--text-color);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* Confessions Grid */
+        .confessions-section {
+            margin-top: 2rem;
+        }
+
+        .confessions-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .confession-grid {
+            display: grid;
+            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+        }
+
+        .confession-item {
+            background: var(--card-color);
+            padding: 1.3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 3px solid var(--primary-color);
+            position: relative;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            
-            .header-btn {
-                min-width: 150px;
-                font-size: 0.85rem;
-                padding: 0.7rem 1rem;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Update SweetAlert Styles */
-        .swal2-popup {
-            background: rgba(248, 249, 250, 0.95) !important;
-            backdrop-filter: blur(10px) !important;
-            border-radius: 20px !important;
-            padding: 2rem !important;
-            border: 1px solid var(--border-color) !important;
+        .confession-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
         }
 
-        html.dark-mode .swal2-popup {
-            background: rgba(45, 45, 45, 0.95) !important;
+        .confession-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .swal2-actions button {
-            box-shadow: var(--shadow) !important;
-            transition: all 0.3s ease !important;
+        .confession-header strong {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
         }
 
-        .swal2-actions button:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: var(--hover-shadow) !important;
+        .confession-id {
+            font-family: monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(162, 102, 218, 0.15);
         }
 
-        .swal2-close:focus {
-            box-shadow: none !important;
+        .reply-tag {
+            font-family: monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            background: rgba(162, 102, 218, 0.15);
+            margin-bottom: 0.8rem;
+            display: inline-block;
+        }
+
+        .confession-item p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            flex: 1;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .confession-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timestamp {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+        }
+
+        .share-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            padding: 0.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: var(--transition);
+            border-radius: 6px;
+        }
+
+        .share-btn:hover {
+            background: rgba(162, 102, 218, 0.1);
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+
+        .share-btn:active {
+            transform: translateY(0);
+        }
+
+        .button-separator {
+            color: var(--text-color);
+            opacity: 0.3;
+            margin: 0 0.2rem;
+        }
+
+        .comment-count {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            grid-column: 1 / -1;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .no-confessions {
+            text-align: center;
+            padding: 3rem;
+            background: var(--card-color);
+            border-radius: 15px;
+            color: var(--text-color);
+            grid-column: 1 / -1;
         }
 
         /* Modal Styles */
-        .custom-modal {
+        .info-modal, .comment-modal, .create-post-modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .custom-modal.active {
-            display: flex;
-        }
-
-        .custom-modal-content {
-            background: var(--card-color);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-        }
-
-        .custom-modal-content h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .custom-modal-content p {
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-
-        .custom-modal-content ul {
-            text-align: left;
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .custom-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-
-        .custom-modal-close:hover {
-            color: var(--secondary-color);
-        }
-
-        /* New Modal Styles */
-        .info-modal {
-            opacity: 0;
-            visibility: hidden;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(8px);
-            z-index: 9999;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .info-modal.show {
-            opacity: 1;
-            visibility: visible;
-            display: flex;
-            justify-content: center;
+            z-index: 1000;
             align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
         }
 
-        .info-modal-content {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .info-modal.show, .comment-modal.active, .create-post-modal.active {
+            display: flex;
+        }
+
+        .info-modal-content, .comment-container, .create-post-content {
             background: var(--card-color);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: var(--shadow);
-            max-width: min(800px, 90%);  /* Changed from 500px */
+            max-width: min(800px, 90%);
             width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
             position: relative;
-            transform: scale(0.95) translateY(-30px);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideUp 0.3s ease;
         }
 
-        .info-modal.show .info-modal-content {
-            transform: scale(1) translateY(0);
-            opacity: 1;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .info-modal-header {
-            text-align: center;
-            margin-bottom: 2rem;
+        .info-modal-content::-webkit-scrollbar,
+        .comment-container::-webkit-scrollbar,
+        .create-post-content::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .info-modal-title {
+        .info-modal-content::-webkit-scrollbar-track,
+        .comment-container::-webkit-scrollbar-track,
+        .create-post-content::-webkit-scrollbar-track {
+            background: rgba(162, 102, 218, 0.1);
+            border-radius: 4px;
+        }
+
+        .info-modal-content::-webkit-scrollbar-thumb,
+        .comment-container::-webkit-scrollbar-thumb,
+        .create-post-content::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .info-modal-title, .comment-header h3 {
             color: var(--primary-color);
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
             text-align: center;
         }
 
         .info-modal-body {
             color: var(--text-color);
             margin-bottom: 1.5rem;
-            max-height: 70vh;
-            overflow-y: auto;
-            padding-right: 1rem;
-        }
-
-        .info-modal-body p,
-        .info-modal-body ul,
-        .comment-item p {
-            max-width: 65ch;  /* Optimal line length for readability */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .info-modal-body::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .info-modal-body::-webkit-scrollbar-track {
-            background: rgba(108, 92, 231, 0.1);
-            border-radius: 4px;
-        }
-
-        .info-modal-body::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
+            line-height: 1.6;
         }
 
         .info-modal-body p {
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .info-modal-body strong {
-            display: block;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .info-modal-body i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            flex-shrink: 0;
         }
 
         .info-modal-button {
@@ -1105,13 +645,13 @@
             padding: 0.8rem;
             border: none;
             border-radius: 25px;
-            background: #b187d9;
-            color: rgb(255, 255, 255);
+            background: var(--primary-color);
+            color: white;
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .info-modal-button:hover {
@@ -1119,117 +659,63 @@
             box-shadow: var(--hover-shadow);
         }
 
-        html.dark-mode .info-modal {
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        @keyframes modalOpen {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        @keyframes modalClose {
-            from {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: scale(0.95) translateY(30px);
-            }
-        }
-        .changelog-version {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .changelog-version strong {
+        .modal-close, .comment-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
             color: var(--primary-color);
-        }
-
-        /* Comment Modal Styles */
-        .comment-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-        }
-
-        .comment-modal.active {
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            transition: var(--transition);
         }
 
-        .comment-container {
-            background: var(--card-color);
-            width: 95%;
-            max-width: min(800px, 95%);  /* Changed from 500px */
-            max-height: 90vh;           /* Changed from 85vh */
-            border-radius: 15px;
-            padding: 1.5rem;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .modal-close:hover, .comment-close:hover {
+            background: rgba(162, 102, 218, 0.1);
+            transform: rotate(90deg);
         }
 
+        /* Comment Styles */
         .comment-header {
             padding-bottom: 1rem;
-            margin-bottom: 0;
+            margin-bottom: 1rem;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .comment-header h3 {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
         .comment-list {
-            flex: 1;
+            max-height: 50vh;
             overflow-y: auto;
-            padding: 0.5rem;
-            margin: -0.5rem;
+            margin-bottom: 1rem;
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
-            max-height: calc(70vh - 120px); /* Account for header and form */
-        }
-
-        .comment-list::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .comment-list::-webkit-scrollbar-track {
-            background: rgba(193, 151, 255, 0.145);
-            border-radius: 4px;
-        }
-
-        .comment-list::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
         }
 
         .comment-item {
-            background: rgba(158, 95, 217, 0.1); /* Light purple background */
+            background: rgba(162, 102, 218, 0.1);
             padding: 1rem;
             border-radius: 12px;
-            border: 1px solid rgba(138, 43, 226, 0.2);
+            border: 1px solid var(--border-color);
+        }
+
+        .comment-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .comment-item p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+            font-size: 0.9rem;
         }
 
         .comment-form {
@@ -1245,43 +731,19 @@
             gap: 0.8rem;
         }
 
-        .comment-form input {
-            flex: 1;
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: rgba(138, 43, 226, 0.1); /* Light purple background */
-        }
-
+        .comment-form input,
         .comment-form textarea {
             padding: 0.8rem;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: rgba(138, 43, 226, 0.1); /* Light purple background */
+        }
+
+        .comment-form input {
+            flex: 1;
+        }
+
+        .comment-form textarea {
             min-height: 60px;
-            resize: none;
-        }
-
-        .comment-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            padding: 0.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .comment-close:hover {
-            background: rgba(110, 110, 110, 0.395);
-            transform: rotate(90deg);
+            resize: vertical;
         }
 
         .no-comments {
@@ -1291,581 +753,107 @@
             opacity: 0.7;
         }
 
-        /* Dark mode adjustments */
-        html.dark-mode .comment-form input,
-        html.dark-mode .comment-form textarea {
-            background: rgba(110, 110, 110, 0.395);
-        }
-
-        .comment-form button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .comment-form.submitting textarea,
-        .comment-form.submitting input {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        @media (min-width: 768px) {
-            .info-modal-content {
-                padding: 2.5rem;
-            }
-            
-            .comment-container {
-                padding: 2rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .info-modal-content {
-                padding: 3rem;
-            }
-            
-            .comment-container {
-                padding: 2.5rem;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .info-modal-title {
-                font-size: 1.8rem;
-            }
-            
-            .info-modal-body {
-                font-size: 1.1rem;
-            }
-            
-            .comment-header h3 {
-                font-size: 1.4rem;
-            }
-        }
-
-        .button-separator {
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
             color: var(--text-color);
-            opacity: 0.3;
-            margin: 0 0.2rem;
-            user-select: none;
-        }
-
-        .comment-count {
-            font-size: 0.8rem;
-            margin-left: 0.3rem;
-            opacity: 0.8;
-        }
-
-        .comment-btn {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .settings-section {
-            margin-bottom: 2rem;
-        }
-
-        .settings-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .settings-section h4 {
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .settings-option {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: rgba(138, 43, 226, 0.1); /* Light purple background */
-            border-radius: 12px;
-            border: 1px solid rgba(138, 43, 226, 0.2);
-        }
-
-        .settings-option label {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            gap: 1rem;
-            margin: 0;
-            cursor: pointer;
-        }
-
-        .settings-option select {
-            width: 100%;
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--card-color);
-            color: var(--text-color);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            cursor: not-allowed;
             opacity: 0.7;
         }
 
-        html.dark-mode .settings-option {
-            background: rgba(212, 151, 255, 0.145);
-        }
-
-        /* Settings Modal Switch Styles */
-        .settings-option .switch {
-            position: relative;
-            display: inline-block;
-            width: 46px;  /* Reduced from 60px */
-            height: 24px; /* Reduced from 30px */
-        }
-
-        .settings-option .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .settings-option .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #3f3f3f;
-            transition: .4s;
-            border-radius: 24px;
-        }
-
-        .settings-option .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px; /* Reduced from 22px */
-            width: 18px;  /* Reduced from 22px */
-            left: 3px;    /* Adjusted from 4px */
-            bottom: 3px;  /* Adjusted from 4px */
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px; /* Reduced from 12px */
-        }
-
-        .settings-option input:checked + .slider:before {
-            transform: translateX(22px); /* Adjusted from 30px */
-        }
-
-        .create-post-btn {
-            margin-top: 1rem;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: white;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .create-post-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--hover-shadow);;
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-        }
-
-        .create-post-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 9999;
-            opacity: 0;
-            transition: all 0.3s ease;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .create-post-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .create-post-content {
-            background: var(--card-color);
-            width: 90%;
-            max-width: 800px;
-            height: 90vh; /* Changed from max-height to fixed height */
-            overflow-y: auto;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-            position: relative;
-            padding: 2rem;
-        }
-
-        .create-post-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .create-post-content::-webkit-scrollbar-track {
-            background: rgba(210, 151, 255, 0.145);
-            border-radius: 4px;
-            margin: 1rem;
-        }
-
-        .create-post-content::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
-        }
-
-        .create-post-content::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
-        }
-
-        /* Adjust form section inside modal */
-        .create-post-modal .form-section {
-            margin: 0;
-            padding: 0;
-            box-shadow: none;
-            border: none;
-        }
-
-        @media (max-height: 600px) {
-            .create-post-content {
-                height: 95vh;
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 151, 151, 0.145);
-            transform: rotate(90deg);
-        }
-
-        /* Adjust form-section styles for modal */
-        .create-post-modal .form-section {
-            margin-bottom: 0;
-            max-height: calc(90vh - 2rem);
-            overflow-y: auto;
-        }
-
-        .event-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://www.rophim.me/images/event_304/behind-hero.webp');
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: left center;
-            opacity: 0.7;
-            z-index: 1;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @media (max-width: 1200px) {
-            .event-background {
-                background-size: 50%;
-                background-position: left center;
-            }
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .event-background {
-                background-size: 60%;
-                background-position: left center;
+            .container {
+                padding: 0.8rem;
             }
-        }
 
-        @media (max-width: 480px) {
-            .event-background {
-                background-size: 70%;
-                background-position: left center;
+            header {
+                padding: 1rem 0;
             }
-        }
-        .learn-more-btn {
-            padding: 0.8rem 1.5rem;
-            background: #ffffff;
-            border: none;
-            border-radius: 10px;
-            color: rgb(0, 0, 0);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
 
-        .learn-more-btn:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            box-shadow: var(--hover-shadow);
-        }
-
-        /* Thêm media queries cho responsive design */
-        @media (max-width: 768px) {
-            header > div:nth-child(2) {
-                padding: 1.5rem !important;
-                transition: padding 0.3s ease-in-out;
-            }
-            
-            header > div:nth-child(2) > div:nth-child(2) > div {
-                width: 80% !important;
-                margin: 0 auto !important;
-                align-items: center !important;
-                text-align: center !important;
-                transition: all 0.3s ease-in-out;
-            }
-            
-            .learn-more-btn {
-                width: 100% !important;
-                max-width: 300px !important;
-                transition: all 0.3s ease-in-out;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header > div:nth-child(2) > div:nth-child(2) > div {
-                width: 100% !important;
-                transition: width 0.3s ease-in-out;
-            }
-        }
-        .event-box {
-            background-color: rgba(147, 112, 219, 0.2); /* Light purple background */
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 1.5rem auto;
-            position: relative;
-            overflow: hidden;
-            min-height: 200px;
-            width: 100%;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .event-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: flex-end;
-            height: 100%;
-        }
-
-        .event-media {
-            width: 45%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 1rem;
-            margin-left: auto;
-        }
-
-        .event-media img {
-            width: 300px;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .learn-more-btn {
-            padding: 0.8rem 1.5rem;
-            background: #ffffff;
-            border: none;
-            border-radius: 10px;
-            color: rgb(0, 0, 0);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            min-width: fit-content;
-            margin-left: auto;
-        }
-
-        @media (max-width: 1024px) {
-            .event-media {
-                width: 50%;
-            }
-            .event-media img {
-                width: 250px;
-            }
-            .event-background {
-                background-size: 60%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .event-media {
-                width: 45%;
-            }
-            .event-media img {
-                width: 180px;
-            }
-            .event-background {
-                background-size: 60%;
-            }
-        }
-
-        @media (max-width: 660px) {
-            .event-media {
-                width: 40%;
-            }
-            .event-media img {
-                width: 140px;
-            }
-            .event-background {
-                background-size: 80%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .event-media {
-                width: 35%;
-            }
-            .event-media img {
-                width: 120px;
-            }
-            .event-background {
-                background-size: 100%;
-            }
-        }
-
-        @media (max-width: 375px) {
-            .event-media {
-                width: 30%;
-            }
-            .event-media img {
-                width: 100px;
-            }
-        }
-        @media (max-width: 768px) {
             h1 {
-                flex-direction: column;
-                text-align: center;
+                font-size: 1.5rem;
+            }
+
+            .theme-toggle-wrapper {
+                top: 10px;
+                right: 10px;
+            }
+
+            .header-buttons {
                 gap: 0.5rem;
-                font-size: 2rem; /* Giảm cỡ chữ xuống */
             }
 
-            h1 i {
-                font-size: 2.5rem;
-                margin-bottom: 0.5rem;
+            .header-btn {
+                min-width: 120px;
+                font-size: 0.8rem;
+                padding: 0.6rem 1rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .confession-grid {
+                gap: 1rem;
+            }
+
+            .confession-item {
+                padding: 1rem;
+            }
+
+            .info-modal-content,
+            .comment-container,
+            .create-post-content {
+                padding: 1.5rem;
+                max-width: 95%;
             }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem; /* Giảm cỡ chữ thêm cho màn hình rất nhỏ */
+            .header-btn {
+                min-width: 100px;
+                font-size: 0.75rem;
+                padding: 0.5rem 0.8rem;
             }
 
-            h1 i {
-                font-size: 2.2rem; /* Giảm cỡ icon tương ứng */
-                margin-bottom: 0.4rem;
+            .create-post-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .confession-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .button-group {
+                width: 100%;
+                justify-content: space-between;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container"> 
+    <div class="theme-toggle-wrapper">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="container">
         <header>
-            <h1><i class="fa-solid fa-graduation-cap"></i> Khoai Chau II High School Confessions</h1>
-            <h1></h1>
-<!--             <div class="event-box">
-                <div class="event-background"></div>
-                <div class="event-content">
-                    <div class="event-media">
-                        <img src="https://www.rophim.me/images/event_304/50y.webp" alt="Subtitle Image">
-                        <button class="learn-more-btn" onclick="window.location.href='30-thang-4.html'">
-                            Tìm hiểu thêm về ngày 30/4
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div> -->
+            <h1>
+                <i class="fa-solid fa-graduation-cap"></i>
+                Khoai Chau II High School Confessions
+            </h1>
             
-
-            <style>
-                .event-box {
-                    background-color: rgba(253,218,167,255);
-                    padding: 2rem;
-                    border-radius: 15px;
-                    margin: 1.5rem auto;
-                    position: relative;
-                    overflow: hidden;
-                    min-height: 200px;
-                    width: 90%;
-                    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .event-content {
-                    position: relative;
-                    z-index: 2;
-                    display: flex;
-                    justify-content: flex-end;
-                    width: 100%;
-                }
-
-                .event-media {
-                    width: 45%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    justify-content: center;
-                    margin-left: auto;
-                    position: relative;
-                }
-
-                .event-media img {
-                    width: 300px;
-                    height: auto;
-                    object-fit: contain;
-                    margin-bottom: 1rem;
-                }
-
-                
-            </style>
-
-<p class="subtitle">⚡🚀 Muốn truy cập vào web nhanh như ăn cướp? Chỉ cần nhớ link rút gọn: <a href="https://bit.ly/nkccfs" style="color: rgb(255, 52, 52); text-decoration: none;">bit.ly/nkccfs</a></p>
+            <p class="subtitle">
+                ⚡🚀 Muốn truy cập vào web nhanh như ăn cướp? Chỉ cần nhớ link rút gọn: 
+                <a href="https://bit.ly/nkccfs" target="_blank">bit.ly/nkccfs</a>
+            </p>
 
             <div class="header-buttons">
                 <button class="header-btn" id="featuresBtn">
@@ -1885,21 +873,20 @@
                     Cài đặt
                 </button>
             </div>
-            <div class="confession-counter">
+
+            <div class="confession-counter" id="counterBtn">
                 <i class="fas fa-scroll"></i>
                 <span id="totalConfessions">0</span> Bài đăng
             </div>
-            <br>
+
             <button class="create-post-btn" id="createPostBtn">
                 <i class="fas fa-plus"></i> Tạo bài đăng mới
             </button>
         </header>
         
         <main>
-            <section class="confessions-section" id="confessions">
-                <div class="section-header">
-                    <h2><i class="fa-solid fa-share-from-square"></i> Các bài đăng</h2>
-                </div>
+            <section class="confessions-section" id="confessionsSection">
+                <h2><i class="fa-solid fa-share-from-square"></i> Các bài đăng</h2>
                 <div id="confessionList" class="confession-grid"></div>
             </section>
         </main>
@@ -1908,17 +895,17 @@
             <p><i class="fa-regular fa-copyright"></i> 2025 - Khoai Chau II Confession. All rights reserved.</p>
         </footer>
     </div>
-    
+
+    <!-- Info Modal -->
     <div id="infoModal" class="info-modal">
         <div class="info-modal-content">
-            <div class="info-modal-header">
-                <h3 class="info-modal-title"></h3>
-            </div>
+            <h3 class="info-modal-title"></h3>
             <div class="info-modal-body"></div>
-            <button class="info-modal-button"></button>
+            <button class="info-modal-button">Đóng</button>
         </div>
     </div>
 
+    <!-- Comment Modal -->
     <div class="comment-modal" id="commentModal">
         <div class="comment-container">
             <button class="comment-close" id="commentClose">
@@ -1931,16 +918,17 @@
             <form class="comment-form" id="commentForm">
                 <input type="hidden" id="confessionId">
                 <div class="input-group">
-                    <input type="text" id="commentName" placeholder="Tên của bạn (không bắt buộc)">
+                    <input type="text" id="commentName" placeholder="Tên của bạn (không bắt buộc)" maxlength="50">
                     <button type="submit" class="submit-btn" style="width: auto; padding: 0.8rem 1.2rem;">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
-                <textarea id="commentContent" placeholder="Viết bình luận của bạn..." required></textarea>
+                <textarea id="commentContent" placeholder="Viết bình luận của bạn..." required maxlength="500"></textarea>
             </form>
         </div>
     </div>
 
+    <!-- Create Post Modal -->
     <div id="createPostModal" class="create-post-modal">
         <div class="create-post-content">
             <button class="modal-close" id="closePostModal">
@@ -1954,15 +942,13 @@
                 <form id="confessionForm">
                     <div class="form-group">
                         <label for="name"><i class="fas fa-user-secret"></i> Tên của bạn (tuỳ chọn)</label>
-                        <input type="text" id="name" name="name" placeholder="Ẩn danh">
+                        <input type="text" id="name" name="name" placeholder="Ẩn danh" maxlength="50">
                     </div>
                     
                     <div class="form-group">
                         <label for="confession"><i class="fas fa-heart"></i> Nội dung</label>
-                        <div class="reply-text-mask"></div>
-                        <div class="reply-tag-overlay"></div>
-                        <textarea id="confession" name="confession" rows="4" 
-                            placeholder="Nội dung bài đăng của bạn..." required></textarea>
+                        <textarea id="confession" name="confession" rows="6" 
+                            placeholder="Nội dung bài đăng của bạn..." required maxlength="1000"></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">
@@ -1970,1527 +956,496 @@
                     </button>
                     <p class="submission-notice">
                         <i class="fas fa-exclamation-circle"></i>
-                        Vui lòng đăng bài với thái độ tôn trọng. Không sử dụng từ ngữ phân biệt, miệt thị hoặc thô tục. Nếu vi phạm, bài đăng sẽ được kiểm duyệt và xoá bỏ.</ap>
+                        Vui lòng đăng bài với thái độ tôn trọng. Không sử dụng từ ngữ phân biệt, miệt thị hoặc thô tục.
+                    </p>
                 </form>
             </section>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Toast notification helper function
+        // Configuration
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec';
+        const CACHE_DURATION = 30000; // 30 seconds
+        let confessionsCache = null;
+        let lastFetchTime = 0;
+
+        // Toast Helper
         function showToast(icon, title, timer = 2000) {
             const Toast = Swal.mixin({
                 toast: true,
-                position: 'top-right',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: timer,
                 timerProgressBar: true,
                 didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                },
-                customClass: {
-                    popup: 'animated-toast',
-                    title: 'toast-title'
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
                 }
             });
-
-            return Toast.fire({
-                icon: icon,
-                title: title
-            });
+            return Toast.fire({ icon, title });
         }
 
-        const form = document.getElementById('confessionForm');
-const confessionList = document.getElementById('confessionList');
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
 
-// Add this function at the top of your script
-function animateCounter(element, targetValue) {
-    const duration = 1000; // Animation duration in milliseconds
-    const steps = 50; // Number of steps in the animation
-    const stepDuration = duration / steps;
-    const increment = targetValue / steps;
-    let current = 0;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= targetValue) {
-            clearInterval(timer);
-            element.textContent = targetValue;
-        } else {
-            element.textContent = Math.floor(current);
-        }
-    }, stepDuration);
-}
-
-// Find the form submission event listener and update it:
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const formDataObj = Object.fromEntries(formData.entries());
-    const confessionTextarea = document.getElementById('confession');
-    const replyId = confessionTextarea.dataset.replyId;
-    
-    // Check if this is a reply and restore the original tag format
-    const confessionText = formDataObj.confession;
-    
-    if (replyId && confessionText.startsWith(`Trả lời ${replyId}:`)) {
-        formDataObj.confession = `<reply_${replyId}>` + confessionText.substring(`Trả lời ${replyId}:`.length);
-    }
-    
-    formDataObj.timestamp = new Date().toISOString();
-
-    form.reset();
-    delete confessionTextarea.dataset.replyId; // Clear stored reply ID
-
-    fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec', {
-        method: 'POST',
-        mode: 'no-cors', // Keep this
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formDataObj)
-    })
-    .then(() => {
-        showToast('success', '<i class="fas fa-heart heart-icon"></i> Bài đăng của bạn đã được chia sẻ');
-        setTimeout(() => window.location.reload(), 500);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('error', 'Đã xảy ra lỗi khi đăng bài');
-    });
-});
-
-// Add this function to handle sharing
-function shareConfession(name, confession, timestamp) {
-    // Create a unique identifier for the confession using timestamp
-    const confessionId = new Date(timestamp).getTime();
-    
-    // Create the website URL with the confession ID
-    const websiteURL = `${window.location.origin}${window.location.pathname}?confession=${confessionId}`;
-    
-    // Create share text with the formatted message
-    const shareText = `Confession by ${name}:\n"${confession}"\nShared from Khoai Chau II High School Confessions\ncheck it out: ${websiteURL}`;
-    
-    // Check if Web Share API is supported
-    if (navigator.share) {
-        navigator.share({
-            title: 'Khoai Chau II High School Confessions',
-            text: shareText,
-            url: websiteURL
-        })
-        .catch((error) => console.log('Lỗi chia sẻ:', error));
-    } else {
-        // Fallback: Copy to clipboard
-        navigator.clipboard.writeText(shareText).then(() => {
-            showToast('success', '<i class="fas fa-copy"></i> Sao chép vào clipboard');
-        });
-    }
-}
-
-function displayConfessions() {
-    confessionList.innerHTML = `
-        <div class="loading">
-            <div class="confetti-container">
-                <div class="confetti"></div>
-                <div class="confetti"></div>
-                <div class="confetti"></div>
-            </div>
-            <div class="loading-content">
-                <div class="loading-icon">
-                    <i class="fas fa-heart"></i>
-                    <div class="loading-rings">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-                <p class="loading-text">Đang tải bài đăng<span class="dots"></span></p>
-            </div>
-        </div>
-    `;
-
-    fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec')
-    .then(response => response.json())
-    .then(data => {
-        console.log('Received data:', data);
-        const confessions = data.confessions || [];
-        
-        confessionList.innerHTML = '';
-        
-        if (confessions.length > 0) {
-            const totalConfessionsElement = document.getElementById('totalConfessions');
-            animateCounter(totalConfessionsElement, confessions.length);
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
-            confessions.forEach(confession => {
-                const confessionItem = document.createElement('div');
-                confessionItem.className = 'confession-item';
-                confessionItem.dataset.id = confession.id; // Important for comment functionality
-                
-                const name = confession.name?.trim() || 'Người dùng ẩn danh';
-                const confessionId = confession.id || '#nkccfsbeta';
-                const confessionText = confession.confession || '';
-                const timestamp = confession.timestamp;
-                
-                // Create unique IDs for buttons
-                const shareButtonId = `share-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-                const downloadButtonId = `download-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-                
-                const replyMatch = confessionText.match(/<reply_(#nkccfs\d{3})>(.*)/);
-                let displayText = confessionText;
-                let replyTag = '';
-                
-                if (replyMatch) {
-                    const [fullMatch, replyId, content] = replyMatch;
-                    replyTag = `<div class="reply-tag">Trả lời ${replyId}</div>`;
-                    displayText = content.trim();
-                }
-                
-                confessionItem.innerHTML = `    
-                    <div class="confession-header">
-                        <p><strong><i class="fas fa-user"></i> ${name}</strong></p>
-                        <span class="confession-id">${confessionId}</span>
-                    </div>
-                    ${replyTag}
-                    <p>${displayText.replace(/\n/g, '<br>')}</p>
-                    <div class="confession-footer">
-                        <small class="timestamp">
-                            <i class="fas fa-clock"></i> 
-                            ${new Date(timestamp).toLocaleString()}
-                        </small>
-                        <div class="button-group">
-                            <button id="${shareButtonId}" class="share-btn" title="Chia sẻ liên kết">
-                                <i class="fas fa-share-alt"></i>
-                            </button>
-                            <button id="${downloadButtonId}" class="share-btn" title="Tải ảnh xuống">
-                                <i class="fas fa-download"></i>
-                            </button>
-                            <button id="reply-${confessionId}" class="share-btn reply-btn" title="Trả lời bài đăng">
-                                <i class="fas fa-reply"></i>
-                            </button>
-                            <span class="button-separator">|</span>
-                            <button class="share-btn comment-btn" title="Bình luận" onclick="openComments('${confessionId}')">
-                                <i class="fas fa-comments"></i>
-                                <span class="comment-count">0</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                confessionList.appendChild(confessionItem);
-                
-                document.getElementById(shareButtonId).addEventListener('click', () => 
-                    shareConfessionLink(name, confessionText, timestamp, confessionId));
-                
-                document.getElementById(downloadButtonId).addEventListener('click', () => 
-                    downloadConfessionImage(name, confessionText, timestamp, confessionId));
-                
-                // Add event listener for reply button
-                document.getElementById(`reply-${confessionId}`).addEventListener('click', () => {
-                    const textarea = document.getElementById('confession');
-                    const replyTag = `<reply_${confessionId}>`;
-                    textarea.value = replyTag; // This will trigger the input event and create preview
-                    textarea.focus();
-                    
-                    // Manually trigger input event to show preview immediately
-                    const inputEvent = new Event('input', {
-                        bubbles: true,
-                        cancelable: true,
-                    });
-                    textarea.dispatchEvent(inputEvent);
-                    
-                    document.querySelector('.form-section').scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center' 
-                    });
-                });
-            });
-        } else {
-            confessionList.innerHTML = `
-                <div class="no-confessions">
-                    <p><i class="fas fa-comment-slash"></i> Chưa có bài đăng nào. Hãy trở thành người đầu tiên chia sẻ!</p>
-                </div>
-            `;
-        }
-
-        // After displaying confessions, fetch comment counts
-        if (confessions.length > 0) {
-            confessions.forEach(confession => {
-                const comments = (data.comments || [])
-                    .filter(c => c.confessionId === confession.id);
-                updateCommentCount(confession.id, comments.length);
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-        confessionList.innerHTML = `
-            <div class="error-message">
-                <p><i class="fas fa-exclamation-circle"></i> Tải bài đăng thất bại. Hãy thử lại sau.</p>
-            </div>
-        `;
-    });
-}
-
-// Initial load
-document.addEventListener('DOMContentLoaded', displayConfessions);
-
-// Refresh every 30 seconds
-const refreshInterval = setInterval(displayConfessions, 1800000);
-
-// Function to manually refresh confessions
-window.refreshConfessions = function() {
-    displayConfessions();
-};
-
-// Cleanup interval on page unload
-window.addEventListener('unload', () => {
-    clearInterval(refreshInterval);
-});
-
-// Add this code at the start of your script to handle confession links
-document.addEventListener('DOMContentLoaded', function() {
-    // Check for confession ID in URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const confessionId = urlParams.get('confession');
-    
-    if (confessionId) {
-        // Fetch and scroll to the specific confession
-        fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec')
-        .then(response => response.text())
-        .then(text => {
-            const data = JSON.parse(text);
-            if (Array.isArray(data)) {
-                // Find the confession with matching timestamp
-                const targetConfession = data.find(c => new Date(c.timestamp).getTime() == confessionId);
-                if (targetConfession) {
-                    // Highlight the shared confession
-                    setTimeout(() => {
-                        const elements = document.querySelectorAll('.confession-item');
-                        elements.forEach(el => {
-                            const timestamp = el.querySelector('.timestamp').textContent;
-                            if (timestamp.includes(new Date(targetConfession.timestamp).toLocaleString())) {
-                                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                el.style.animation = 'highlight 2s ease';
-                            }
-                        });
-                    }, 1000);
-                }
-            }
-        });
-    }
-});
-
-// Add this CSS for highlighting shared confession
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes highlight {
-        0% { background-color: var(--primary-color); }
-        100% { background-color: var(--card-color); }
-    }
-`;
-document.head.appendChild(style);
-
-// Add these new functions for sharing and downloading
-async function shareConfessionLink(name, confession, timestamp, id) {
-    try {
-        const confessionId = timestamp ? new Date(timestamp).getTime() : Date.now();
-        const websiteURL = `${window.location.origin}${window.location.pathname}?confession=${confessionId}`;
-        const shareText = `${name}'s confession ${id}\nCheck out this confession: ${websiteURL}`;
-
-        if (navigator.share) {
-            await navigator.share({
-                text: shareText
-            });
-        } else {
-            await navigator.clipboard.writeText(shareText);
-            
-            showToast('success', '<i class="fas fa-copy"></i> Đã sao chép liên kết vào clipboard');
-        }
-    } catch (error) {
-        console.error('Lỗi chia sẻ:', error);
-        showToast('error', 'Chia sẻ bài đăng thất bại');
-    }
-}
-
-async function downloadConfessionImage(name, confession, timestamp, id) {
-    try {
-        // Create unique URL for this specific confession
-        const confessionId = timestamp ? new Date(timestamp).getTime() : Date.now();
-        const websiteURL = `${window.location.origin}${window.location.pathname}?confession=${confessionId}`;
-        
-        // Create a temporary div for the confession card
-        const card = document.createElement('div');
-        card.className = 'confession-card-for-image';
-        
-        // Format the date properly
-        const formattedDate = timestamp ? new Date(timestamp).toLocaleString() : new Date().toLocaleString();
-        
-        const formattedConfession = confession.replace(/\n/g, '<br>');
-        card.innerHTML = `
-            <div class="card-content">
-                <div class="image-header">
-                    <h3><i class="fas fa-user"></i> ${name}</h3>
-                    <span class="confession-id">${id}</span>
-                </div>
-                <p class="confession-text">"${formattedConfession}"</p>
-                <div class="card-footer">
-                    <span>Khoai Chau II High School Confessions</span>
-                    <span><i class="fas fa-clock"></i> ${formattedDate}</span>
-                </div>
-                <div class="card-link">
-                    <span>Visit: ${websiteURL}</span>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(card);
-
-        // Generate image
-        const canvas = await html2canvas(card, {
-            backgroundColor: '#fff0f3',
-            scale: 2,
-            logging: false,
-            allowTaint: true,
-            useCORS: true
-        });
-
-        document.body.removeChild(card);
-
-        // Download image
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'confession.png';
-        link.click();
-        
-        showToast('success', '<i class="fas fa-download"></i> Đã tải ảnh xuống!');
-
-    } catch (error) {
-        console.error('Lỗi:', error);
-        showToast('error', 'Tạo ảnh thất bại :(');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
-
-    // Check saved theme preference or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Apply initial theme
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        htmlElement.classList.add('dark-mode');
-        themeToggle.checked = true;
-    }
-    
-    // Toggle theme
-    themeToggle.addEventListener('change', () => {
-        if (themeToggle.checked) {
-            htmlElement.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            htmlElement.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light');
-        }
-    });
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            if (e.matches) {
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                 htmlElement.classList.add('dark-mode');
                 themeToggle.checked = true;
-            } else {
-                htmlElement.classList.remove('dark-mode');
-                themeToggle.checked = false;
             }
         }
-    });
-});
 
-// Add this CSS for the confession ID
-const styleForId = document.createElement('style');
-styleForId.textContent = `
-    .confession-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    .confession-id {
-        font-family: monospace;
-        font-weight: bold;
-        color: var(--primary-color);
-        font-size: 0.9em;
-    }
-`;
-document.head.appendChild(styleForId);
-
-// Thêm style cho counter
-const counterStyle = document.createElement('style');
-counterStyle.textContent = `
-    .confession-counter {
-        cursor: pointer;
-        transition: transform 0.2s ease;
-    }
-    
-    .confession-counter:hover {
-        transform: translateY(-2px);
-    }
-    
-    .confession-counter:active {
-        transform: translateY(0);
-    }
-`;
-document.head.appendChild(counterStyle);
-
-// Thêm event listener cho counter
-document.addEventListener('DOMContentLoaded', () => {
-    const counter = document.querySelector('.confession-counter');
-    const confessionsSection = document.getElementById('confessions');
-    
-    counter.addEventListener('click', () => {
-        confessionsSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-        });
-    });
-    
-    // ...existing theme toggle code...
-});
-
-// Thêm CSS cho loading animation mới
-const loadingStyle = document.createElement('style');
-loadingStyle.textContent = `
-    .loading {
-        text-align: center;
-        padding: 3rem;
-        grid-column: 1 / -1;
-        background: var(--card-color);
-        border-radius: 15px;
-        box-shadow: var(--shadow);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .confetti-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-    }
-
-    .confetti {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background: var(--primary-color);
-        opacity: 0.6;
-        border-radius: 50%;
-        animation: confetti 3s ease-in-out infinite;
-    }
-
-    .confetti:nth-child(1) {
-        left: 25%;
-        animation-delay: 0s;
-    }
-
-    .confetti:nth-child(2) {
-        left: 50%;
-        animation-delay: 1s;
-    }
-
-    .confetti:nth-child(3) {
-        left: 75%;
-        animation-delay: 2s;
-    }
-
-    .loading-content {
-        position: relative;
-        z-index: 1;
-    }
-
-    .loading-icon {
-        position: relative;
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 1.5rem;
-    }
-
-    .loading-icon i {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.8rem;
-        color: var(--primary-color);
-        animation: pulse 2s ease-in-out infinite;
-    }
-
-    .loading-rings div {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border: 2px solid var(--primary-color);
-        border-radius: 50%;
-        opacity: 0;
-    }
-
-    .loading-rings div:nth-child(1) {
-        width: 40px;
-        height: 40px;
-        animation: ring 2s ease-in-out infinite;
-    }
-
-    .loading-rings div:nth-child(2) {
-        width: 60px;
-        height: 60px;
-        animation: ring 2s ease-in-out infinite;
-        animation-delay: 0.4s;
-    }
-
-    .loading-rings div:nth-child(3) {
-        width: 80px;
-        height: 80px;
-        animation: ring 2s ease-in-out infinite;
-        animation-delay: 0.8s;
-    }
-
-    .loading-text {
-        font-size: 1.2rem;
-        color: var(--primary-color);
-        font-weight: 500;
-        margin-top: 1rem;
-        opacity: 0.9;
-    }
-
-    .dots::after {
-        content: '';
-        animation: dots 1.5s steps(4, end) infinite;
-    }
-
-    @keyframes confetti {
-        0% {
-            transform: translate(0, 0) rotate(0deg);
-            opacity: 0.6;
-        }
-        50% {
-            transform: translate(0, 100px) rotate(180deg);
-            opacity: 0.8;
-        }
-        100% {
-            transform: translate(0, 0) rotate(360deg);
-            opacity: 0.6;
-        }
-    }
-
-    @keyframes ring {
-        0% {
-            transform: translate(-50%, -50%) scale(0.8);
-            opacity: 0;
-        }
-        50% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.5;
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1.2);
-            opacity: 0;
-        }
-    }
-
-    @keyframes pulse {
-        0%, 100% {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        50% {
-            transform: translate(-50%, -50%) scale(1.2);
-        }
-    }
-
-    @keyframes dots {
-        0%, 20% { content: ''; }
-        40% { content: '.'; }
-        60% { content: '..'; }
-        80% { content: '...'; }
-    }
-
-    /* Dark mode adjustments */
-    html.dark-mode .loading {
-        background: var(--card-color);
-    }
-
-    html.dark-mode .confetti {
-        background: var(--primary-color);
-    }
-`;
-document.head.appendChild(loadingStyle);
-
-    // Add this after form const declaration
-    const confessionTextarea = document.getElementById('confession');
-    const replyOverlay = document.querySelector('.reply-tag-overlay');
-    const replyTextMask = document.querySelector('.reply-text-mask');
-
-    confessionTextarea.addEventListener('input', () => {
-        const text = confessionTextarea.value;
-        const replyMatch = text.match(/^<reply_(#nkccfs\d{3})>/);
-        
-        if (replyMatch) {
-            const [fullMatch, replyId] = replyMatch;
-            // Replace the tag with visual preview in a box
-            const previewText = `<span class="reply-preview-box">Trả lời ${replyId}:</span> `;
-            const restOfText = text.substring(fullMatch.length);
-            
-            // Create a temporary element to handle HTML content
-            const temp = document.createElement('div');
-            temp.innerHTML = previewText;
-            const plainPreviewText = temp.textContent;
-            
-            confessionTextarea.value = plainPreviewText + restOfText;
-            confessionTextarea.dataset.replyId = replyId;
-            
-            // Position cursor after preview
-            const cursorPos = plainPreviewText.length;
-            confessionTextarea.setSelectionRange(cursorPos, cursorPos);
-        } else if (!text.includes('Trả lời #nkccfs')) {
-            delete confessionTextarea.dataset.replyId;
-        }
-    });
-
-    // Thêm vào phần xử lý hiển thị confession để giữ nguyên format reply
-    function processConfessionText(confessionText) {
-        const replyMatch = confessionText.match(/^<reply_(#nkccfs\d{3})>(.*)/);
-        if (replyMatch) {
-            const [fullMatch, replyId, content] = replyMatch;
-            return {
-                replyTag: `<div class="reply-tag">Trả lời ${replyId}:</div>`,
-                displayText: content.trim()
-            };
-        }
-        return {
-            replyTag: '',
-            displayText: confessionText
-        };
-    }
-
-    // Cập nhật trong hàm displayConfessions khi tạo confession item
-    // Thay thế đoạn xử lý replyMatch cũ bằng:
-    // ...existing code...
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const featuresBtn = document.getElementById('featuresBtn');
-        const changelogBtn = document.getElementById('changelogBtn');
-
-        // Move the processConfessionText function before we use it
-        function processConfessionText(confessionText) {
-            const replyMatch = confessionText.match(/^<reply_(#nkccfs\d{3})>(.*)/);
-            if (replyMatch) {
-                const [fullMatch, replyId, content] = replyMatch;
-                return {
-                    replyTag: `<div class="reply-tag">Trả lời ${replyId}:</div>`,
-                    displayText: content.trim()
-                };
-            }
-            return {
-                replyTag: '',
-                displayText: confessionText
-            };
-        }
-
-        // Close modal on close button click
-        modalCloseBtn.addEventListener('click', closeModal);
-
-        // Close modal on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-    });
-
-    // Function to open the modal
-    function openModal(title, content) {
-        modalTitle.textContent = title;
-        modalBody.innerHTML = content;
-        modal.classList.add('active');
-    }
-
-    // Function to close the modal
-    function closeModal() {
-        modal.classList.remove('active');
-    }
-
-// Replace the existing modal JavaScript code with this
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('infoModal');
-    const modalTitle = modal.querySelector('.info-modal-title');
-    const modalBody = modal.querySelector('.info-modal-body');
-    const modalButton = modal.querySelector('.info-modal-button');
-    const featuresBtn = document.getElementById('featuresBtn');
-    const changelogBtn = document.getElementById('changelogBtn');
-
-    function showModal(title, content, buttonText) {
-        modalTitle.textContent = title;
-        modalBody.innerHTML = content;
-        modalButton.textContent = buttonText;
-        
-        // Add animation classes
-        modal.classList.add('show');
-        modal.querySelector('.info-modal-content').style.animation = 'modalOpen 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-        
-        document.body.style.overflow = 'hidden';
-    }
-
-    function hideModal() {
-        const content = modal.querySelector('.info-modal-content');
-        content.style.animation = 'modalClose 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-        
-        setTimeout(() => {
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-            content.style.animation = '';
-        }, 300);
-    }
-
-    // Event Listeners
-    featuresBtn.addEventListener('click', () => {
-        showModal('Hướng dẫn tính năng', `
-            <p><i class="fas fa-reply"></i> <strong>Trả lời bài đăng:</strong> Nhấn nút reply để trả lời một bài đăng cụ thể</p>
-            <p><i class="fas fa-share-alt"></i> <strong>Chia sẻ:</strong> Chia sẻ bài đăng qua đường link</p>
-            <p><i class="fas fa-download"></i> <strong>Tải xuống:</strong> Tải bài đăng dưới dạng hình ảnh</p>
-            <p><i class="fas fa-moon"></i> <strong>Chế độ tối:</strong> Chuyển đổi giao diện sáng/tối</p>
-            <p><i class="fa-solid fa-comments"></i> <strong>Bình luận:</strong> Xem và bình luận bài đăng</p>
-        `, 'Đã hiểu');
-    });
-
-    changelogBtn.addEventListener('click', () => {
-        showModal('Nhật ký sửa đổi', `
-        <p class="changelog-version"><strong>Bản cập nhật 13/05/2025</strong></p>
-            <ul>
-                <li><i class="fas fa-plus"></i> Ad thích màu tím:)) (maybe)</li>
-                <p></p>
-            </ul>
-        <p class="changelog-version"><strong>---------------------------------------</strong></p>
-        <p class="changelog-version"><strong>Bản cập nhật 05/04/2025</strong></p>
-            <ul>
-                <li><i class="fas fa-plus"></i> Cải thiện lại một vài tính năng, chức năng</li>
-                <li><i class="fas fa-plus"></i> Giản lược phần đăng bài cho gọn gàng hơn</li>
-                <li><i class="fas fa-plus"></i> Cải thiện hiệu suất và nâng cấp nhỏ cho UI/UX</li>
-                <li><i class="fas fa-plus"></i> Giờ thì bạn có thể tìm hiểu thêm một chút về lịch sử của ngày 30 tháng 4 ❤️</li>
-                <p></p>
-            </ul>
-        <p class="changelog-version"><strong>---------------------------------------</strong></p>
-        <p class="changelog-version"><strong>Bản cập nhật 03/04/2025</strong></p>
-            <ul>
-                <li><i class="fas fa-plus"></i> Thêm tính năng bình luận</li>
-                <li><i class="fas fa-plus"></i> Thêm một vài chức năng: Cài đặt, Về chúng tôi,..</li>
-                <li><i class="fas fa-plus"></i> Cải thiện một số tính năng, hiệu suất và nâng cấp UI/UX</li>
-                <li><i class="fas fa-plus"></i> Nền chủ đạo đã được thay đổi. Hãy thử khám phá nó nhé!</li>
-                <p></p>
-            </ul>
-        <p class="changelog-version"><strong>---------------------------------------</strong></p>
-        <p class="changelog-version"><strong>Bản cập nhật 29/03/2025</strong></p>
-            <ul>
-                <li><i class="fas fa-plus"></i> Thêm các nút Hướng dẫn chức năng, Nhật kí sửa đổi</li>
-                <li><i class="fas fa-plus"></i> Cải thiện một số tính năng, vấn đề bảo mật và hiệu suất</li>
-                <li><i class="fas fa-plus"></i> Thêm tính năng trả lời bài đăng</li>
-                <p></p>
-            </ul>
-        <p class="changelog-version"><strong>---------------------------------------</strong></p>
-        <p class="changelog-version"><strong>Bản cập nhật 25/03/2025</strong></p>
-            <ul>
-                <li><i class="fas fa-star"></i> Ra mắt website</li>
-                <li><i class="fas fa-plus"></i> Thêm tính năng đăng bài</li>
-                <li><i class="fas fa-plus"></i> Thêm tính năng chia sẻ</li>
-                <li><i class="fas fa-plus"></i> Thêm tính năng lưu bài đăng dưới dạng hình ảnh</li>
-                <li><i class="fas fa-plus"></i> Thêm chế độ tối</li>
-            </ul>
-        `, 'Đóng');
-    });
-
-    // Add new buttons
-    const aboutBtn = document.getElementById('aboutBtn');
-    const settingsBtn = document.getElementById('settingsBtn');
-
-    aboutBtn.addEventListener('click', () => {
-        showModal('Về chúng tôi', `
-        <div class="about-section">
-            <h4><i class="fas fa-graduation-cap"></i> Giới thiệu</h4>
-            <p><strong>KCII Confessions</strong> là dự án phi lợi nhuận được tạo ra với mục đích xây dựng một cộng đồng kết nối những người đã, đang và sẽ là học sinh của trường THPT Khoái Châu II.</p>
-        </div>
-
-        <div class="about-section">
-            <h4><i class="fas fa-heart"></i> Sứ mệnh</h4>
-            <p>Tạo ra một không gian an toàn và tích cực để các bạn học sinh có thể:</p>
-            <ul>
-                <li>Chia sẻ những cảm xúc, suy nghĩ của mình</li>
-                <li>Kết nối với các thế hệ học sinh khác</li>
-                <li>Xây dựng một cộng đồng lành mạnh, đoàn kết</li>
-            </ul>
-        </div>
-
-        <div class="about-section">
-            <h4><i class="fas fa-shield-alt"></i> Cam kết</h4>
-            <ul>
-                <li>Bảo vệ quyền riêng tư của người dùng</li>
-                <li>Không lưu trữ thông tin cá nhân</li>
-                <li>Kiểm duyệt nội dung để đảm bảo môi trường lành mạnh</li>
-                <li>Liên tục cải thiện và phát triển tính năng mới</li>
-            </ul>
-        </div>
-
-        <div class="about-section">
-            <h4><i class="fas fa-envelope"></i> Liên hệ</h4>
-            <ul class="contact-list">
-                <li>
-                    <i class="fas fa-envelope"></i>
-                    <span>azamiyuuki008@gmail.com</span>
-                </li>
-                <li>
-                    <i class="fab fa-facebook"></i>
-                    <span>fb.com/htch.9999</span>
-                </li>
-                <li>
-                    <i class="fab fa-github"></i>
-                    <span>github.com/htch9999</span>
-                </li>
-            </ul>
-        </div>
-    `, 'Đóng');
-    });
-
-    settingsBtn.addEventListener('click', () => {
-        showModal('Cài đặt', `
-            <div class="settings-section">
-                <h4><i class="fas fa-palette"></i> Giao diện</h4>
-                <div class="settings-option">
-                    <label>
-                        Chế độ tối
-                        <label class="switch">
-                            <input type="checkbox" id="darkModeToggle">
-                            <span class="slider"></span>
-                        </label>
-                    </label>
-                </div>
-            </div>
-
-            <div class="settings-section">
-                <h4><i class="fas fa-language"></i> Ngôn ngữ</h4>
-                <div class="settings-option">
-                    <select id="languageSelect" disabled>
-                        <option value="vi">Tiếng Việt</option>
-                        <option value="en">English (Coming soon)</option>
-                    </select>
-                </div>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.7;">
-                    <i class="fas fa-info-circle"></i> Hiện tại chỉ hỗ trợ Tiếng Việt
-                </p>
-            </div>
-        `, 'Đóng');
-
-        // Sync dark mode toggle state
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        darkModeToggle.checked = document.documentElement.classList.contains('dark-mode');
-        
-        darkModeToggle.addEventListener('change', () => {
-            if (darkModeToggle.checked) {
-                document.documentElement.classList.add('dark-mode');
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                htmlElement.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark');
             } else {
-                document.documentElement.classList.remove('dark-mode');
+                htmlElement.classList.remove('dark-mode');
                 localStorage.setItem('theme', 'light');
             }
         });
-    });
 
-    // Add event listener for dark mode toggle in settings
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.id === 'darkModeToggle') {
-            const themeToggle = document.getElementById('themeToggle');
-            themeToggle.click(); // Trigger the existing theme toggle
-        }
-    });
-
-    // Add styles for settings modal
-    const settingsStyle = document.createElement('style');
-    settingsStyle.textContent = `
-        .settings-option {
-            margin: 1rem 0;
-            padding: 0.8rem;
-            background: rgba(108, 92, 231, 0.1);
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .settings-option select {
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-            background: var(--card-color);
-            color: var(--text-color);
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .settings-option label {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            width: 100%;
-        }
-
-        html.dark-mode .settings-option {
-            background: rgba(194, 129, 255, 0.044);
-        }
-    `;
-    document.head.appendChild(settingsStyle);
-
-    // Close button click
-    modalButton.addEventListener('click', hideModal);
-
-    // Click outside modal
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            hideModal();
-        }
-    });
-
-    // Press Escape to close
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
-            hideModal();
-        }
-    });
-});
-
-// ...existing code...
-
-// Add these new functions for comment handling
-function openComments(confessionId) {
-    const modal = document.getElementById('commentModal');
-    const commentList = modal.querySelector('.comment-list');
-    const confessionItem = document.querySelector(`[data-id="${confessionId}"]`);
-    
-    if (!confessionItem) return;
-    
-    const userName = confessionItem.querySelector('strong').textContent;
-    modal.querySelector('.comment-title').textContent = `Bài viết của ${userName}`;
-    
-    // Reset and show modal first
-    commentList.innerHTML = '<div class="loading">Đang tải bình luận...</div>';
-    modal.classList.add('active');
-    
-    // Set confession ID for comment form
-    document.getElementById('confessionId').value = confessionId;
-    
-    // Load comments
-    fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec')
-        .then(response => response.json())
-        .then(data => {
-            console.log('Loading comments for:', confessionId);
-            console.log('Comments data:', data);
+        // Counter Animation
+        function animateCounter(element, targetValue) {
+            const duration = 1000;
+            const steps = 30;
+            const stepDuration = duration / steps;
+            const increment = targetValue / steps;
+            let current = 0;
             
-            const comments = (data.comments || [])
-                .filter(c => c.confessionId === confessionId)
-                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= targetValue) {
+                    clearInterval(timer);
+                    element.textContent = targetValue;
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, stepDuration);
+        }
+
+        // Fetch with Cache
+        async function fetchConfessions() {
+            const now = Date.now();
             
-            if (comments.length === 0) {
-                commentList.innerHTML = '<p class="no-comments">Chưa có bình luận nào.</p>';
-                return;
+            if (confessionsCache && (now - lastFetchTime) < CACHE_DURATION) {
+                return confessionsCache;
+            }
+
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                confessionsCache = data;
+                lastFetchTime = now;
+                return data;
+            } catch (error) {
+                console.error('Fetch error:', error);
+                throw error;
+            }
+        }
+
+        // Display Confessions
+        async function displayConfessions() {
+            const confessionList = document.getElementById('confessionList');
+            confessionList.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">Đang tải bài đăng...</p>
+                </div>
+            `;
+
+            try {
+                const data = await fetchConfessions();
+                const confessions = data.confessions || [];
+                
+                confessionList.innerHTML = '';
+                
+                if (confessions.length === 0) {
+                    confessionList.innerHTML = `
+                        <div class="no-confessions">
+                            <i class="fas fa-comment-slash" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <p>Chưa có bài đăng nào. Hãy trở thành người đầu tiên chia sẻ!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Update counter with animation
+                const totalConfessionsElement = document.getElementById('totalConfessions');
+                animateCounter(totalConfessionsElement, confessions.length);
+                
+                // Create confession items with staggered animation
+                confessions.forEach((confession, index) => {
+                    setTimeout(() => {
+                        const item = createConfessionItem(confession, data.comments);
+                        confessionList.appendChild(item);
+                    }, index * 50); // Stagger by 50ms
+                });
+
+            } catch (error) {
+                confessionList.innerHTML = `
+                    <div class="no-confessions">
+                        <i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <p>Tải bài đăng thất bại. Hãy thử lại sau.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Create Confession Item
+        function createConfessionItem(confession, allComments) {
+            const confessionItem = document.createElement('div');
+            confessionItem.className = 'confession-item';
+            confessionItem.dataset.id = confession.id;
+            
+            const name = confession.name?.trim() || 'Người dùng ẩn danh';
+            const confessionId = confession.id || '#nkccfsbeta';
+            const confessionText = confession.confession || '';
+            const timestamp = confession.timestamp;
+            
+            const replyMatch = confessionText.match(/<reply_(#nkccfs\d{3})>(.*)/s);
+            let displayText = confessionText;
+            let replyTag = '';
+            
+            if (replyMatch) {
+                const [, replyId, content] = replyMatch;
+                replyTag = `<div class="reply-tag">Trả lời ${replyId}</div>`;
+                displayText = content.trim();
             }
             
-            commentList.innerHTML = comments.map(comment => `
-                <div class="comment-item">
-                    <strong><i class="fas fa-user"></i> ${comment.name}</strong>
-                    <p>${comment.comment}</p>
+            const commentCount = (allComments || []).filter(c => c.confessionId === confessionId).length;
+            
+            confessionItem.innerHTML = `
+                <div class="confession-header">
+                    <strong><i class="fas fa-user"></i> ${escapeHtml(name)}</strong>
+                    <span class="confession-id">${confessionId}</span>
+                </div>
+                ${replyTag}
+                <p>${escapeHtml(displayText).replace(/\n/g, '<br>')}</p>
+                <div class="confession-footer">
                     <small class="timestamp">
                         <i class="fas fa-clock"></i> 
-                        ${new Date(comment.timestamp).toLocaleString()}
+                        ${formatDate(timestamp)}
                     </small>
+                    <div class="button-group">
+                        <button class="share-btn" title="Chia sẻ liên kết" onclick="shareConfession('${confessionId}')">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                        <button class="share-btn" title="Trả lời bài đăng" onclick="replyToConfession('${confessionId}')">
+                            <i class="fas fa-reply"></i>
+                        </button>
+                        <span class="button-separator">|</span>
+                        <button class="share-btn" title="Bình luận" onclick="openComments('${confessionId}', '${escapeHtml(name)}')">
+                            <i class="fas fa-comments"></i>
+                            <span class="comment-count">${commentCount}</span>
+                        </button>
+                    </div>
                 </div>
-            `).join('');
-        })
-        .catch(error => {
-            console.error('Error loading comments:', error);
-            commentList.innerHTML = '<p class="error-message">Không thể tải bình luận. Vui lòng thử lại sau.</p>';
-        });
-}
-
-// Update comment form submission
-document.getElementById('commentForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const form = e.target;
-    const submitButton = form.querySelector('button[type="submit"]');
-    
-    // Prevent double submission
-    if (form.classList.contains('submitting')) return;
-    
-    const confessionId = document.getElementById('confessionId').value;
-    const name = document.getElementById('commentName').value.trim() || 'Người dùng ẩn danh';
-    const comment = document.getElementById('commentContent').value.trim();
-    
-    if (!comment) return;
-    
-    // Add loading state
-    form.classList.add('submitting');
-    submitButton.disabled = true;
-    
-    const commentData = {
-        type: 'comment',
-        confessionId,
-        name,
-        comment,
-        timestamp: new Date().toISOString()
-    };
-    
-    try {
-        await fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(commentData)
-        });
-        
-        document.getElementById('commentContent').value = '';
-        
-        showToast('success', 'Đã đăng bình luận!');
-
-        // Add artificial delay before reloading comments
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await loadComments(confessionId);
-        
-    } catch (error) {
-        console.error('Comment submission error:', error);
-        showToast('error', 'Không thể đăng bình luận. Vui lòng thử lại sau.');
-    } finally {
-        // Remove loading state
-        form.classList.remove('submitting');
-        submitButton.disabled = false;
-    }
-});
-
-document.getElementById('commentClose').addEventListener('click', () => {
-    document.getElementById('commentModal').classList.remove('active');
-});
-
-// Close comment modal when clicking outside
-document.getElementById('commentModal').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('commentModal')) {
-        e.target.classList.remove('active');
-    }
-});
-
-// Remove or update this event listener section to remove modalCloseBtn reference
-document.addEventListener('DOMContentLoaded', function() {
-    const featuresBtn = document.getElementById('featuresBtn');
-    const changelogBtn = document.getElementById('changelogBtn');
-    const modal = document.getElementById('infoModal');
-
-    function processConfessionText(confessionText) {
-        const replyMatch = confessionText.match(/^<reply_(#nkccfs\d{3})>(.*)/);
-        if (replyMatch) {
-            const [fullMatch, replyId, content] = replyMatch;
-            return {
-                replyTag: `<div class="reply-tag">Trả lời ${replyId}:</div>`,
-                displayText: content.trim()
-            };
-        }
-        return {
-            replyTag: '',
-            displayText: confessionText
-        };
-    }
-
-    // Remove modalCloseBtn references
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
-    });
-});
-
-// Add loadComments function definition before it's used
-function loadComments(confessionId) {
-    const commentList = document.querySelector('.comment-list');
-    commentList.innerHTML = '<div class="loading">Đang tải bình luận...</div>';
-    
-    fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec')
-        .then(response => response.json())
-        .then(data => {
-            console.log('Loading comments for:', confessionId);
-            console.log('Comments data:', data);
+            `;
             
-            const comments = (data.comments || [])
-                .filter(c => c.confessionId === confessionId)
-                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            return confessionItem;
+        }
+
+        // Helper Functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
             
-            if (comments.length === 0) {
-                commentList.innerHTML = '<p class="no-comments">Chưa có bình luận nào.</p>';
-                return;
+            if (hours < 1) {
+                const minutes = Math.floor(diff / (1000 * 60));
+                return minutes < 1 ? 'Vừa xong' : `${minutes} phút trước`;
+            } else if (hours < 24) {
+                return `${hours} giờ trước`;
+            } else {
+                return date.toLocaleDateString('vi-VN', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
             }
+        }
+
+        // Share Confession
+        async function shareConfession(confessionId) {
+            const url = `${window.location.origin}${window.location.pathname}?confession=${confessionId}`;
             
-            commentList.innerHTML = comments.map(comment => `
-                <div class="comment-item">
-                    <strong><i class="fas fa-user"></i> ${comment.name}</strong>
-                    <p>${comment.comment}</p>
-                    <small class="timestamp">
-                        <i class="fas fa-clock"></i> 
-                        ${new Date(comment.timestamp).toLocaleString()}
-                    </small>
-                </div>
-            `).join('');
-        })
-        .catch(error => {
-            console.error('Error loading comments:', error);
-            commentList.innerHTML = '<p class="error-message">Không thể tải bình luận. Vui lòng thử lại sau.</p>';
-        });
-}
+            try {
+                if (navigator.share) {
+                    await navigator.share({
+                        title: 'KCII Confession',
+                        text: `Xem bài đăng ${confessionId}`,
+                        url: url
+                    });
+                } else {
+                    await navigator.clipboard.writeText(url);
+                    showToast('success', 'Đã sao chép liên kết!');
+                }
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    console.error('Share error:', error);
+                }
+            }
+        }
 
-// Update the comment form submission to use the defined loadComments function
-document.getElementById('commentForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const confessionId = document.getElementById('confessionId').value;
-    const name = document.getElementById('commentName').value.trim() || 'Người dùng ẩn danh';
-    const comment = document.getElementById('commentContent').value.trim();
-    
-    if (!comment) return;
-    
-    const commentData = {
-        type: 'comment',
-        confessionId,
-        name,
-        comment,
-        timestamp: new Date().toISOString()
-    };
-    
-    try {
-        await fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(commentData)
-        });
-        
-        document.getElementById('commentContent').value = '';
-        
-        // Show success toast
-        showToast('success', 'Đã đăng bình luận!');
-
-        // Use the defined loadComments function
-        setTimeout(() => loadComments(confessionId), 1000);
-        
-    } catch (error) {
-        console.error('Comment submission error:', error);
-        showToast('error', 'Không thể đăng bình luận. Vui lòng thử lại sau.');
-    }
-});
-
-// Remove all other comment form related event listeners
-// ...rest of existing code...
-
-// Replace all comment form submission handlers with this single one
-document.addEventListener('DOMContentLoaded', function() {
-    const commentForm = document.getElementById('commentForm');
-    
-    // Remove any existing event listeners
-    commentForm.replaceWith(commentForm.cloneNode(true));
-    
-    // Get the fresh form reference
-    const newCommentForm = document.getElementById('commentForm');
-    
-    // Add single event listener
-    newCommentForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Prevent double submission
-        if (this.classList.contains('submitting')) return;
-        this.classList.add('submitting');
-        
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const nameInput = document.getElementById('commentName');
-        const commentInput = document.getElementById('commentContent');
-        const confessionId = document.getElementById('confessionId').value;
-        
-        submitBtn.disabled = true;
-        
-        try {
-            const commentData = {
-                type: 'comment',
-                confessionId: confessionId,
-                name: nameInput.value.trim() || 'Người dùng ẩn danh',
-                comment: commentInput.value.trim(),
-                timestamp: new Date().toISOString()
-            };
+        // Reply to Confession
+        function replyToConfession(confessionId) {
+            document.getElementById('createPostModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
             
-            if (!commentData.comment) return;
-
-            await fetch('https://script.google.com/macros/s/AKfycbxZidtEOqL7ky8vG7YgMS_sNiuIUzLPEidORf7OJ7E7FjbD4fF47JyucF4fVJCxA5mM/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(commentData)
-            });
-
-            commentInput.value = '';
+            const textarea = document.getElementById('confession');
+            textarea.value = `<reply_${confessionId}>`;
+            textarea.focus();
             
-            // Show success message
-            showToast('success', 'Đã đăng bình luận!');
+            setTimeout(() => {
+                textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+            }, 100);
+        }
 
-            // Reload comments after a short delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
+        // Comments
+        async function openComments(confessionId, userName) {
+            const modal = document.getElementById('commentModal');
+            const commentList = modal.querySelector('.comment-list');
+            
+            modal.querySelector('.comment-title').textContent = `Bài viết của ${userName}`;
+            document.getElementById('confessionId').value = confessionId;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
             await loadComments(confessionId);
+        }
+
+        async function loadComments(confessionId) {
+            const commentList = document.querySelector('.comment-list');
+            commentList.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p class="loading-text">Đang tải...</p></div>';
             
-        } catch (error) {
-            console.error('Comment submission error:', error);
-            showToast('error', 'Không thể đăng bình luận. Vui lòng thử lại sau.');
-        } finally {
-            this.classList.remove('submitting');
-            submitBtn.disabled = false;
+            try {
+                const data = await fetchConfessions();
+                const comments = (data.comments || [])
+                    .filter(c => c.confessionId === confessionId)
+                    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                if (comments.length === 0) {
+                    commentList.innerHTML = '<p class="no-comments">Chưa có bình luận nào.</p>';
+                    return;
+                }
+                
+                commentList.innerHTML = comments.map(comment => `
+                    <div class="comment-item">
+                        <strong><i class="fas fa-user"></i> ${escapeHtml(comment.name || 'Ẩn danh')}</strong>
+                        <p>${escapeHtml(comment.comment)}</p>
+                        <small class="timestamp">
+                            <i class="fas fa-clock"></i> ${formatDate(comment.timestamp)}
+                        </small>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                commentList.innerHTML = '<p class="no-comments">Không thể tải bình luận.</p>';
+            }
         }
-    });
-});
 
-// Remove all other comment form related event listeners
-// ...existing code...
+        // Form Submissions
+        document.getElementById('confessionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đăng...';
+            
+            try {
+                const formData = new FormData(form);
+                const data = {
+                    name: formData.get('name') || 'Ẩn danh',
+                    confession: formData.get('confession'),
+                    timestamp: new Date().toISOString()
+                };
+                
+                await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                form.reset();
+                document.getElementById('createPostModal').classList.remove('active');
+                document.body.style.overflow = '';
+                
+                showToast('success', 'Đã đăng bài thành công!');
+                
+                // Clear cache and reload
+                confessionsCache = null;
+                setTimeout(() => displayConfessions(), 1000);
+                
+            } catch (error) {
+                showToast('error', 'Đăng bài thất bại. Vui lòng thử lại.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Đăng!';
+            }
+        });
 
-// Add this style section after the existing styles
-const additionalStyles = document.createElement('style');
-additionalStyles.textContent = `
-    .button-separator {
-        color: var(--text-color);
-        opacity: 0.3;
-        margin: 0 0.2rem;
-        user-select: none;
-    }
+        document.getElementById('commentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            if (form.classList.contains('submitting')) return;
+            form.classList.add('submitting');
+            submitBtn.disabled = true;
+            
+            try {
+                const confessionId = document.getElementById('confessionId').value;
+                const data = {
+                    type: 'comment',
+                    confessionId: confessionId,
+                    name: document.getElementById('commentName').value.trim() || 'Ẩn danh',
+                    comment: document.getElementById('commentContent').value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+                
+                await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                document.getElementById('commentContent').value = '';
+                showToast('success', 'Đã đăng bình luận!');
+                
+                // Clear cache and reload comments
+                confessionsCache = null;
+                setTimeout(() => loadComments(confessionId), 1000);
+                
+            } catch (error) {
+                showToast('error', 'Không thể đăng bình luận.');
+            } finally {
+                form.classList.remove('submitting');
+                submitBtn.disabled = false;
+            }
+        });
 
-    .comment-count {
-        font-size: 0.8rem;
-        margin-left: 0.3rem;
-        opacity: 0.8;
-    }
+        // Modal Controls
+        document.getElementById('createPostBtn').addEventListener('click', () => {
+            document.getElementById('createPostModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
 
-    .comment-btn {
-        display: inline-flex;
-        align-items: center;
-    }
-`;
-document.head.appendChild(additionalStyles);
-
-// Update the comment count when loading comments
-function updateCommentCount(confessionId, count) {
-    const confessionItem = document.querySelector(`[data-id="${confessionId}"]`);
-    if (confessionItem) {
-        const commentCount = confessionItem.querySelector('.comment-count');
-        if (commentCount) {
-            commentCount.textContent = count;
-        }
-    }
-}
-
-// ...existing code...
-
-// Add new styles for about modal sections
-const aboutStyles = document.createElement('style');
-aboutStyles.textContent = `
-    .about-section {
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        border-radius: 10px;
-        background: rgba(194, 129, 255, 0.044);
-        border: 1px solid rgba(194, 129, 255, 0.044);
-    }
-
-    .about-section:last-child {
-        margin-bottom: 0;
-    }
-
-    .about-section h4 {
-        color: var(--primary-color);
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .about-section p {
-        margin: 0.5rem 0;
-        line-height: 1.6;
-    }
-
-    .contact-list {
-        list-style: none;
-        padding: 0;
-        margin: 0.5rem 0;
-    }
-
-    .contact-list li {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem;
-        border-radius: 6px;
-        transition: background 0.3s ease;
-    }
-
-    .contact-list li:hover {
-        background: rgba(255, 127, 127, 0.308);
-    }
-
-    .contact-list i {
-        color: var(--primary-color);
-        width: 20px;
-        text-align: center;
-    }
-
-    .team-member {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        padding: 0.5rem;
-        border-radius: 6px;
-        transition: background 0.3s ease;
-    }
-
-    .team-member:hover {
-        background: rgba(108, 92, 231, 0.1);
-    }
-
-    .team-member img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    .team-member-info {
-        flex: 1;
-    }
-
-    .team-member-info h5 {
-        margin: 0;
-        color: var(--primary-color);
-        font-size: 0.9rem;
-    }
-
-    .team-member-info p {
-        margin: 0;
-        font-size: 0.8rem;
-        opacity: 0.8;
-    }
-`;
-document.head.appendChild(aboutStyles);
-
-// Update the about button click handler
-aboutBtn.addEventListener('click', () => {
-    showModal('Về chúng tôi', `
-        <div class="about-section">
-            <h4><i class="fas fa-graduation-cap"></i> Giới thiệu</h4>
-            <p><strong>KCII Confessions Website</strong> là dự án phi lợi nhuận được tạo ra với mục đích xây dựng một cộng đồng kết nối những người đã, đang và sẽ là học sinh của trường THPT Khoái Châu II.</p>
-        </div>
-
-        <div class="about-section">
-            <h4><i class="fas fa-heart"></i> Sứ mệnh</h4>
-            <p>Tạo ra một không gian an toàn và tích cực để các bạn học sinh có thể:</p>
-            <ul>
-                <li>Chia sẻ những cảm xúc, suy nghĩ của mình</li>
-                <li>Kết nối với các thế hệ học sinh khác</li>
-                <li>Xây dựng một cộng đồng lành mạnh, đoàn kết</li>
-            </ul>
-        </div>
-
-        <div class="about-section">
-            <h4><i class="fas fa-shield-alt"></i> Cam kết</h4>
-            <ul>
-                <li>Bảo vệ quyền riêng tư của người dùng</li>
-                <li>Không lưu trữ thông tin cá nhân</li>
-                <li>Kiểm duyệt nội dung để đảm bảo môi trường lành mạnh</li>
-                <li>Liên tục cải thiện và phát triển tính năng mới</li>
-            </ul>
-        </div>
-
-        <div class="about-section">
-            <h4><i class="fas fa-envelope"></i> Liên hệ</h4>
-            <ul class="contact-list">
-                <li>
-                    <i class="fas fa-envelope"></i>
-                    <span>azamiyuuki008@gmail.com</span>
-                </li>
-                <li>
-                    <i class="fab fa-facebook"></i>
-                    <span>fb.com/htch.9999</span>
-                </li>
-                <li>
-                    <i class="fab fa-github"></i>
-                    <span>github.com/htch9999</span>
-                </li>
-            </ul>
-        </div>
-    `, 'Đóng');
-});
-
-// ...existing code...
-
-// Add this near the start of your main script
-document.addEventListener('DOMContentLoaded', function() {
-    const createPostBtn = document.getElementById('createPostBtn');
-    const createPostModal = document.getElementById('createPostModal');
-    const closePostModal = document.getElementById('closePostModal');
-
-    // Open create post modal
-    createPostBtn.addEventListener('click', () => {
-        createPostModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    });
-
-    // Close modal when clicking the close button
-    closePostModal.addEventListener('click', () => {
-        createPostModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-
-    // Close modal when clicking outside
-    createPostModal.addEventListener('click', (e) => {
-        if (e.target === createPostModal) {
-            createPostModal.classList.remove('active');
+        document.getElementById('closePostModal').addEventListener('click', () => {
+            document.getElementById('createPostModal').classList.remove('active');
             document.body.style.overflow = '';
-        }
-    });
+        });
 
-    // Close modal when pressing Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && createPostModal.classList.contains('active')) {
-            createPostModal.classList.remove('active');
+        document.getElementById('commentClose').addEventListener('click', () => {
+            document.getElementById('commentModal').classList.remove('active');
             document.body.style.overflow = '';
+        });
+
+        document.getElementById('counterBtn').addEventListener('click', () => {
+            document.getElementById('confessionsSection').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Close modals on outside click
+        [document.getElementById('createPostModal'), document.getElementById('commentModal'), document.getElementById('infoModal')].forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    modal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Info Modals
+        function showInfoModal(title, content) {
+            const modal = document.getElementById('infoModal');
+            modal.querySelector('.info-modal-title').textContent = title;
+            modal.querySelector('.info-modal-body').innerHTML = content;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
         }
-    });
 
-    // Close modal after successful post submission
-    const confessionForm = document.getElementById('confessionForm');
-    confessionForm.addEventListener('submit', () => {
-        createPostModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-});
+        document.getElementById('featuresBtn').addEventListener('click', () => {
+            showInfoModal('Hướng dẫn tính năng', `
+                <p><i class="fas fa-reply"></i> <strong>Trả lời bài đăng:</strong> Nhấn nút reply để trả lời một bài đăng cụ thể</p>
+                <p><i class="fas fa-share-alt"></i> <strong>Chia sẻ:</strong> Chia sẻ bài đăng qua đường link</p>
+                <p><i class="fas fa-comments"></i> <strong>Bình luận:</strong> Xem và bình luận bài đăng</p>
+                <p><i class="fas fa-moon"></i> <strong>Chế độ tối:</strong> Chuyển đổi giao diện sáng/tối</p>
+            `);
+        });
 
-// ...existing code...
-</script>
+        document.getElementById('changelogBtn').addEventListener('click', () => {
+            showInfoModal('Nhật ký sửa đổi', `
+                <p style="text-align: center;"><strong>Bản cập nhật mới nhất</strong></p>
+                <ul>
+                    <li><i class="fas fa-bolt"></i> Tối ưu hóa hiệu suất tải trang</li>
+                    <li><i class="fas fa-paint-brush"></i> Cải thiện UI/UX toàn diện</li>
+                    <li><i class="fas fa-mobile-alt"></i> Responsive design tốt hơn</li>
+                    <li><i class="fas fa-clock"></i> Hiển thị thời gian tương đối</li>
+                    <li><i class="fas fa-database"></i> Thêm caching để giảm tải server</li>
+                </ul>
+            `);
+        });
+
+        document.getElementById('aboutBtn').addEventListener('click', () => {
+            showInfoModal('Về chúng tôi', `
+                <p><strong>KCII Confessions</strong> là dự án phi lợi nhuận được tạo ra với mục đích xây dựng một cộng đồng kết nối những người đã, đang và sẽ là học sinh của trường THPT Khoái Châu II.</p>
+                <p><strong>Sứ mệnh:</strong> Tạo ra một không gian an toàn và tích cực để các bạn học sinh có thể chia sẻ, kết nối và xây dựng cộng đồng.</p>
+                <p><strong>Liên hệ:</strong></p>
+                <ul style="list-style: none; padding: 0;">
+                    <li><i class="fas fa-envelope"></i> azamiyuuki008@gmail.com</li>
+                    <li><i class="fab fa-facebook"></i> fb.com/htch.9999</li>
+                </ul>
+            `);
+        });
+
+        document.getElementById('settingsBtn').addEventListener('click', () => {
+            showInfoModal('Cài đặt', `
+                <div style="padding: 1rem; background: rgba(162, 102, 218, 0.1); border-radius: 10px;">
+                    <p><strong>Chế độ tối</strong></p>
+                    <p>Sử dụng nút chuyển đổi ở góc trên bên phải để bật/tắt chế độ tối.</p>
+                </div>
+            `);
+        });
+
+        document.querySelector('.info-modal-button').addEventListener('click', () => {
+            document.getElementById('infoModal').classList.remove('show');
+            document.body.style.overflow = '';
+        });
+
+        // Initialize
+        initTheme();
+        displayConfessions();
+
+        // Auto refresh every 5 minutes
+        setInterval(() => {
+            confessionsCache = null;
+            displayConfessions();
+        }, 300000);
+    </script>
 </body>
 </html>
