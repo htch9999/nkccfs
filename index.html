@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đang chuyển hướng...</title>
+    
+    <!-- Redirect ngay lập tức -->
+    <meta http-equiv="refresh" content="0; url=https://facebook.com/kc2cfs">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ffffff;
+            color: #333;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top-color: #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem;
+            font-weight: 500;
+        }
+        
+        p {
+            margin: 0;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h1>Đang chuyển hướng...</h1>
+        <p>Nếu không tự động chuyển, <a href="https://facebook.com/kc2cfs" id="manualLink">nhấn vào đây</a></p>
+    </div>
+    
+    <script>
+        // URL đích - Thay đổi URL này theo nhu cầu
+        const targetURL = 'https://facebook.com/kc2cfs';
+        
+        // Cập nhật link manual
+        document.getElementById('manualLink').href = targetURL;
+        
+        // Redirect sau 0.5 giây (backup nếu meta refresh không hoạt động)
+        setTimeout(() => {
+            window.location.href = targetURL;
+        }, 500);
+    </script>
+</body>
+</html>
